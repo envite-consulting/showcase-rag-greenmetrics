@@ -20,7 +20,7 @@ The measured RAG system consists of two services:
 - `rag-app`: FastAPI application for indexing, retrieval, augmentation, and generation orchestration
 - `ollama`: local LLM service used by the RAG app
 
-The local comparison scenarios measure the same phases:
+The local scenario measures these phases:
 
 1. `Warmup Indexing`
 2. `Indexing`
@@ -36,15 +36,12 @@ The fixed workload is defined by:
 
 ## Scenarios
 
-| File                                                                     | Purpose                                                                                                        |
-|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| [usage_scenario.yml](usage_scenario.yml)                                 | small default scenario for the GMT hosted service; uses `tinyllama:1.1b`, fewer questions, and shorter answers |
-| [usage_scenario.baseline.yml](usage_scenario.baseline.yml)               | local Linux baseline with simple chunks and `llama3:8b`                                                        |
-| [usage_scenario.small_chunks.yml](usage_scenario.small_chunks.yml)       | local comparison with smaller chunks and less overlap                                                          |
-| [usage_scenario.structured_bm25.yml](usage_scenario.structured_bm25.yml) | local comparison with structured chunks, metadata filtering, and BM25                                          |
-| [usage_scenario.small_llm.yml](usage_scenario.small_llm.yml)             | local comparison with the smaller `tinyllama:1.1b` model                                                       |
+| File | Purpose |
+| --- | --- |
+| [usage_scenario.yml](usage_scenario.yml) | remote scenario for the GMT hosted service; defaults to `tinyllama:1.1b`, fewer questions, and shorter answers |
+| [usage_scenario.local.yml](usage_scenario.local.yml) | local Linux scenario; defaults to `llama3:8b` |
 
-The default [usage_scenario.yml](usage_scenario.yml) is deliberately lightweight because the hosted service expects a repository with a default usage scenario and runs it on shared infrastructure.
+Both scenarios expose the relevant RAG configuration through service environment values. For local Linux runs, edit [usage_scenario.local.yml](usage_scenario.local.yml). For hosted runs, keep [usage_scenario.yml](usage_scenario.yml) lightweight and adjust variables in the GMT Scenario Runner.
 
 ## Configuration
 
@@ -85,7 +82,8 @@ showcase-rag-greenmetrics
 │   ├── get_dataset.py
 │   ├── questions.json
 │   └── rag_queries.py
-└── usage_scenario*.yml         # comparison scenarios
+├── usage_scenario.yml          # hosted-service scenario
+└── usage_scenario.local.yml    # local Linux scenario
 ```
 
 ## Sources

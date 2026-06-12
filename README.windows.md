@@ -22,6 +22,12 @@ The hosted service uses the committed [.env.example](.env.example) file as the d
 
 The default [usage_scenario.yml](usage_scenario.yml) is optimized for hosted execution:
 
+- `CHUNKING_STRATEGY=simple`
+- `CHUNK_SIZE=512`
+- `CHUNK_OVERLAP=64`
+- `METADATA_FILTER=False`
+- `METADATA_ENHANCEMENT=False`
+- `POST_BM25_RERANK=False`
 - `OLLAMA_MODEL=tinyllama:1.1b`
 - `RAG_QUESTION_LIMIT=4`
 - `MAX_TOKENS=256`
@@ -36,16 +42,18 @@ This keeps the remote run lightweight while still demonstrating the full RAG wor
 
 The dataset preparation step is included in the hosted scenario because the GMT server clones the repository fresh and does not have the local `src/data/raw` cache.
 
-The larger `llama3:8b` baseline remains available for local Linux runs in [usage_scenario.baseline.yml](usage_scenario.baseline.yml).
+The larger `llama3:8b` default remains available for local Linux runs in [usage_scenario.local.yml](usage_scenario.local.yml). It is not recommended for the hosted service because remote execution may become very slow.
 
 ## Run On The Hosted Service
 
-1. Push this repository to GitHub or another Git hosting service.
-2. Open the GMT hosted service: [https://metrics.green-coding.io/](https://metrics.green-coding.io/)
-3. Request a new measurement for the repository URL.
-4. Use the default `usage_scenario.yml` when asked for the scenario file.
+1. Open the GMT hosted service: [https://metrics.green-coding.io/](https://metrics.green-coding.io/)
+2. Request a new measurement for this public repository URL.
+3. Use the default `usage_scenario.yml` when asked for the scenario file.
+4. Keep the LLM configuration lightweight for the first run; the default scenario already selects the small hosted-service setup.
 5. Wait for the measurement email or report link.
 6. Open the report in the GMT dashboard.
+
+You only need to fork, clone, or push your own repository if you want to measure modified code or custom scenario files.
 
 The hosted report can then be used to show phase-level metrics and demonstrate how GMT evaluates a containerized RAG workload.
 
@@ -53,7 +61,11 @@ The hosted report can then be used to show phase-level metrics and demonstrate h
 
 For a quick Windows-friendly showcase, use the hosted report from [usage_scenario.yml](usage_scenario.yml) as the main result.
 
-For deeper comparisons between RAG configurations, run the Linux local workflow from [README.linux.md](README.linux.md). The local workflow includes additional scenarios for chunk size, structured retrieval with BM25, and a small LLM comparison.
+You can still adjust the RAG configuration in the GMT Scenario Runner. Variables such as `CHUNKING_STRATEGY`, `CHUNK_SIZE`, `CHUNK_OVERLAP`, `METADATA_FILTER`, `METADATA_ENHANCEMENT`, `POST_BM25_RERANK`, `RAG_QUESTION_LIMIT`, and `MAX_TOKENS` are suitable for hosted experiments.
+
+Avoid large LLMs such as `llama3:8b` for hosted runs. They may work, but they can be very slow on the shared remote infrastructure. Keep `OLLAMA_MODEL=tinyllama:1.1b` unless you specifically want to test a larger model.
+
+For deeper local comparisons on your own hardware, run the Linux workflow from [README.linux.md](README.linux.md).
 
 ## Notes For Development
 
