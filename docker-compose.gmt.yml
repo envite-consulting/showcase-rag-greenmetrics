@@ -1,0 +1,34 @@
+services:
+  rag-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: showcase-rag-app
+    env_file:
+      - .env.example
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src/data:/src/data
+      - ./src/scripts:/src/scripts:ro
+      - ./hf-cache:/root/.cache/huggingface
+      - ./logs:/logs
+      - ./emb_models:/emb_models
+    depends_on:
+      - ollama
+
+  ollama:
+    container_name: showcase-ollama
+    image: ollama/ollama@sha256:d4188c1dfa870386a14e299976aed96daeb83876b69e1a852c9d09ea76463b9f
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+      - ./docker/entrypoint.sh:/entrypoint.sh:ro
+    env_file:
+      - .env.example
+    restart: unless-stopped
+    entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
+
+volumes:
+  ollama-data:

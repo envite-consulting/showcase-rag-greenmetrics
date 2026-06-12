@@ -1,0 +1,57 @@
+---
+name: RAG Showcase - Remote Default
+author: envite Consulting GmbH
+description: Small default scenario for the Green Metrics Tool hosted service. Uses a tiny Ollama model and a reduced question set so remote showcase runs stay lightweight.
+
+compose-file: !include docker-compose.gmt.yml
+
+services:
+  rag-app:
+    environment:
+      OLLAMA_MODEL: "tinyllama:1.1b"
+      RAG_QUESTION_LIMIT: 4
+      MAX_TOKENS: 256
+  ollama:
+    environment:
+      OLLAMA_MODEL: "tinyllama:1.1b"
+
+flow:
+  - name: Prepare Dataset
+    container: rag-app
+    commands:
+      - type: console
+        command: python scripts/get_dataset.py --force
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: Warmup Indexing
+    container: rag-app
+    commands:
+      - type: console
+        command: python -m app.warmup_indexing
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: Indexing
+    container: rag-app
+    commands:
+      - type: console
+        command: python -m app.indexing
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: Warmup RAG
+    container: rag-app
+    commands:
+      - type: console
+        command: python -m app.warmup_rag
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: RAG Queries
+    container: rag-app
+    commands:
+      - type: console
+        command: python scripts/rag_queries.py
+        log-stdout: true
+        read-notes-stdout: true

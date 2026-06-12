@@ -1,0 +1,45 @@
+---
+name: RAG Showcase - Small Chunks
+author: envite Consulting GmbH
+description: Comparison configuration with smaller text chunks and less overlap.
+
+compose-file: !include docker-compose.gmt.yml
+
+services:
+  rag-app:
+    environment:
+      CHUNK_SIZE: 256
+      CHUNK_OVERLAP: 32
+
+flow:
+  - name: Warmup Indexing
+    container: rag-app
+    commands:
+      - type: console
+        command: python -m app.warmup_indexing
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: Indexing
+    container: rag-app
+    commands:
+      - type: console
+        command: python -m app.indexing
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: Warmup RAG
+    container: rag-app
+    commands:
+      - type: console
+        command: python -m app.warmup_rag
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: RAG Queries
+    container: rag-app
+    commands:
+      - type: console
+        command: python scripts/rag_queries.py
+        log-stdout: true
+        read-notes-stdout: true

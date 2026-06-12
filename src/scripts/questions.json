@@ -1,0 +1,50 @@
+[
+  {
+    "q_id": "q001",
+    "question": "What is the nature of gravity in string theory at high energies?",
+    "gold_doc": "arxiv_0908.0606.txt",
+    "ground_truth": "scalar-tensor"
+  },
+  {
+    "q_id": "q002",
+    "question": "What is the name of the phase in Boolean networks where most or all nodes become fixed in a state which is independent of the initial conditions?",
+    "gold_doc": "arxiv_0905.0925.txt",
+    "ground_truth": "frozen"
+  },
+  {
+    "q_id": "q003",
+    "question": "Which equation's soliton solutions were studied to show that the order of two Backlund transformations is irrelevant?",
+    "gold_doc": "arxiv_0902.2456.txt",
+    "ground_truth": "sine-Gordon"
+  },
+  {
+    "q_id": "q004",
+    "question": "What is the name of the theory described as a 5D weakly-coupled system?",
+    "gold_doc": "arxiv_0804.0124.txt",
+    "ground_truth": "effective field theory"
+  },
+  {
+    "q_id": "q005",
+    "question": "What is the relationship between the direction of doping and the direction of the electric field in persistent electric-field doping?",
+    "gold_doc": "arxiv_1202.1665.txt",
+    "ground_truth": "The direction of doping should depend on the direction of the electric field."
+  },
+  {
+    "q_id": "q006",
+    "question": "What is the definition of a Moore-Penrose inverse?",
+    "gold_doc": "arxiv_1209.1767.txt",
+    "ground_truth": "A unique matrix pseudoinverse"
+  },
+  {
+    "q_id": "q007",
+    "question": "What does the requirement of positive black hole entropy prevent in the corresponding scalar field theory?",
+    "gold_doc": "arxiv_1301.2769.txt",
+    "ground_truth": "ghost or tachyon fields"
+  },
+  {
+    "q_id": "q008",
+    "question": "What are the primary goals of the Open Data movement?",
+    "gold_doc": "arxiv_0908.0373.txt",
+    "ground_truth": "legal and licensing issues around publicly exposed data"
+  }
+]

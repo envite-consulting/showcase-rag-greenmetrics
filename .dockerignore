@@ -1,0 +1,32 @@
+# Git and editor state
+.git/
+.gitignore
+.idea/
+.vscode/
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.venv-gmt/
+venv/
+
+# Runtime caches and generated data
+hf-cache/
+emb_models/
+logs/
+src/data/index/
+src/data/raw/*
+!src/data/raw/.gitkeep
+
+# Local Docker / Compose overrides
+.env
+.env.local
+*.env.local
+docker-compose.override.yml
+
+# Local GMT or showcase exports
+gmt-results/
+reports/
+*.log
