@@ -1,15 +1,25 @@
 ---
-name: RAG Showcase - Small Chunks
+name: RAG Showcase - Local
 author: envite Consulting GmbH
-description: Comparison configuration with smaller text chunks and less overlap.
+description: Local GMT scenario for Linux measurements. Defaults to llama3:8b and can be adjusted through the service environment values below.
 
 compose-file: !include docker-compose.gmt.yml
 
 services:
   rag-app:
     environment:
-      CHUNK_SIZE: 256
-      CHUNK_OVERLAP: 32
+      CHUNKING_STRATEGY: "simple"
+      CHUNK_SIZE: 512
+      CHUNK_OVERLAP: 64
+      METADATA_FILTER: "False"
+      METADATA_ENHANCEMENT: "False"
+      POST_BM25_RERANK: "False"
+      OLLAMA_MODEL: "llama3:8b"
+      RAG_QUESTION_LIMIT: 8
+      MAX_TOKENS: 512
+  ollama:
+    environment:
+      OLLAMA_MODEL: "llama3:8b"
 
 flow:
   - name: Warmup Indexing
