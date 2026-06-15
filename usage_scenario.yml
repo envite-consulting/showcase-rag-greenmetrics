@@ -50,7 +50,7 @@ flow:
     container: ollama
     commands:
       - type: console
-        command: sh -c 'ollama pull "$OLLAMA_MODEL"'
+        command: sh -c 'ollama pull tinyllama:1.1b'
         log-stdout: true
         read-notes-stdout: true
 
