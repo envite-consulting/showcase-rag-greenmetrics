@@ -20,8 +20,6 @@ services:
   ollama:
     container_name: showcase-ollama
     image: ollama/ollama@sha256:d4188c1dfa870386a14e299976aed96daeb83876b69e1a852c9d09ea76463b9f
-    environment:
-      OLLAMA_MODEL: llama3:8b
     ports:
       - "11434:11434"
     volumes:

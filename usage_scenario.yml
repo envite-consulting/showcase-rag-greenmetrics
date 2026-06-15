@@ -17,9 +17,6 @@ services:
       OLLAMA_MODEL: "tinyllama:1.1b"
       RAG_QUESTION_LIMIT: 4
       MAX_TOKENS: 256
-  ollama:
-    environment:
-      OLLAMA_MODEL: "tinyllama:1.1b"
 
 flow:
   - name: Prepare Dataset
@@ -47,10 +44,10 @@ flow:
         read-notes-stdout: true
 
   - name: Pull Ollama Model
-    container: ollama
+    container: rag-app
     commands:
       - type: console
-        command: sh -c 'ollama pull tinyllama:1.1b'
+        command: python scripts/pull_ollama_model.py
         log-stdout: true
         read-notes-stdout: true
 

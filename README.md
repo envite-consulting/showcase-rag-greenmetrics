@@ -79,6 +79,7 @@ showcase-rag-greenmetrics
 ├── src/scripts/
 │   ├── dataset.json            # fixed arXiv selection
 │   ├── get_dataset.py
+│   ├── pull_ollama_model.py
 │   ├── questions.json
 │   └── rag_queries.py
 ├── usage_scenario.yml          # hosted-service scenario

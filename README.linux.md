@@ -72,8 +72,6 @@ Edit the `environment` values in [usage_scenario.local.yml](usage_scenario.local
 | `RAG_QUESTION_LIMIT` | `4`, `8`, `12` |
 | `MAX_TOKENS` | `256`, `512` |
 
-When changing `OLLAMA_MODEL`, set it for both `rag-app` and `ollama` in the scenario file.
-
 ## Sources
 
 - [GMT Installation on Linux](https://docs.green-coding.io/docs/installation/installation-linux/)
