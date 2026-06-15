@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Start Ollama in the background
 /bin/ollama serve &
@@ -14,7 +15,7 @@ MODEL="${OLLAMA_MODEL:-llama3:8b}"
 # Pull Ollama model
 echo "Pulling model: $MODEL"
 ollama pull "$MODEL" > /var/log/ollama_pull.log 2>&1    # Removes clutter from docker build output
-echo "Done!"
+echo "Model ready: $MODEL"
 
 # Wait for Ollama process to finish
 wait $pid

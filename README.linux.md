@@ -22,17 +22,6 @@ cd showcase-rag-greenmetrics
 
 The RAG app provides defaults in [src/app/config.yaml](src/app/config.yaml). For local GMT experiments, edit the `environment` values in [usage_scenario.local.yml](usage_scenario.local.yml).
 
-## Prepare The Workload
-
-Download the fixed document set once before running local comparisons. This keeps dataset transfer out of the measured GMT workflow.
-
-```shell
-cd /path/to/showcase-rag-greenmetrics
-docker compose --profile app up --build -d
-docker exec showcase-rag-app python scripts/get_dataset.py --force
-docker compose --profile app down
-```
-
 ## Optional App Check
 
 Before starting a GMT measurement, you can run the RAG app once to check that Docker, Ollama, indexing, and the API work together.
@@ -45,6 +34,7 @@ docker compose --profile app up --build
 In a second terminal:
 
 ```shell
+docker exec showcase-rag-app python scripts/get_dataset.py --force
 docker exec showcase-rag-app python -m app.indexing
 curl -X POST "http://localhost:8000/ask" -H "Content-Type: application/json" -d "{\"q_id\":\"manual-001\",\"question\":\"What is the nature of gravity in string theory at high energies?\"}"
 ```

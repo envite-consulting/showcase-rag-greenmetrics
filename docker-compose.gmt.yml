@@ -3,14 +3,15 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    container_name: showcase-rag-app
+    container_name: rag-app
     depends_on:
       - ollama
 
   ollama:
-    container_name: showcase-ollama
+    container_name: ollama
     build:
       context: .
       dockerfile: docker/Dockerfile.ollama
     environment:
       OLLAMA_MODEL: llama3:8b
+    entrypoint: /entrypoint.sh

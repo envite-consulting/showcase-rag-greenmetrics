@@ -10,7 +10,7 @@ The GMT hosted service runs the measurement on Green Coding infrastructure. This
 
 The hosted service requires:
 
-- this repository to be available on GitHub
+- a public repository, available on GitHub
 - the application to be containerized
 - a [usage_scenario.yml](usage_scenario.yml) file in the repository
 

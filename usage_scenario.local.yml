@@ -22,6 +22,14 @@ services:
       OLLAMA_MODEL: "llama3:8b"
 
 flow:
+  - name: Prepare Dataset
+    container: rag-app
+    commands:
+      - type: console
+        command: python scripts/get_dataset.py --force
+        log-stdout: true
+        read-notes-stdout: true
+
   - name: Warmup Indexing
     container: rag-app
     commands:

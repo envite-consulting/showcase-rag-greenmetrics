@@ -20,14 +20,15 @@ The measured RAG system consists of two services:
 - `rag-app`: FastAPI application for indexing, retrieval, augmentation, and generation orchestration
 - `ollama`: local LLM service used by the RAG app
 
-The local scenario measures these phases:
+Both scenarios measure these phases:
 
-1. `Warmup Indexing`
-2. `Indexing`
-3. `Warmup RAG`
-4. `RAG Queries`
+1. `Prepare Dataset`
+2. `Warmup Indexing`
+3. `Indexing`
+4. `Warmup RAG`
+5. `RAG Queries`
 
-The hosted-service default [usage_scenario.yml](usage_scenario.yml) adds one initial `Prepare Dataset` phase because the hosted service clones the repository fresh and needs to download the fixed document set before indexing.
+The `Prepare Dataset` phase downloads the fixed document set inside the measured container before indexing.
 
 The fixed workload is defined by:
 
