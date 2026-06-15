@@ -1,7 +1,7 @@
 ---
 name: RAG Showcase - Local
 author: envite Consulting GmbH
-description: Local GMT scenario for Linux measurements. Defaults to llama3:8b and can be adjusted through the service environment values below.
+description: Local GMT scenario for Linux measurements. Adjust the service environment values below to test different RAG configurations.
 
 compose-file: !include docker-compose.gmt.yml
 

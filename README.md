@@ -11,7 +11,7 @@ The showcase is intentionally small and self-contained. It uses a fixed arXiv do
 | Linux       | Run GMT locally                 | [README.linux.md](README.linux.md)     |
 | Windows     | Use the free GMT hosted service | [README.windows.md](README.windows.md) |
 
-Windows users should use the hosted GMT service instead of local measurements. Local Windows or WSL runs are useful for development, but they can produce limited or inconsistent measurement data depending on host support for metric providers.
+Windows users should use the hosted GMT service instead of local measurements. Local WSL runs are useful for development, but they can produce limited or inconsistent measurement data depending on host support for metric providers.
 
 ## What Gets Measured
 
@@ -41,11 +41,11 @@ The fixed workload is defined by:
 | [usage_scenario.yml](usage_scenario.yml) | remote scenario for the GMT hosted service; defaults to `tinyllama:1.1b`, fewer questions, and shorter answers |
 | [usage_scenario.local.yml](usage_scenario.local.yml) | local Linux scenario; defaults to `llama3:8b` |
 
-Both scenarios expose the relevant RAG configuration through service environment values. For local Linux runs, edit [usage_scenario.local.yml](usage_scenario.local.yml). For hosted runs, keep [usage_scenario.yml](usage_scenario.yml) lightweight and adjust variables in the GMT Scenario Runner.
+The RAG app defaults are defined in [src/app/config.yaml](src/app/config.yaml). Variables declared in the `usage_scenario.*.yml` files override these defaults. For local Linux runs, edit [usage_scenario.local.yml](usage_scenario.local.yml) before starting the measurement. For hosted runs, keep [usage_scenario.yml](usage_scenario.yml) lightweight and adjust variables in the GMT Scenario Runner.
 
 ## Configuration
 
-All base runtime parameters are defined in [.env.example](.env.example). The Compose files load this file through `env_file`; scenario files override individual values where needed.
+Base runtime parameters are defined by [src/app/config.yaml](src/app/config.yaml). The GMT scenario files override individual values where needed.
 
 Important variables:
 
@@ -54,7 +54,6 @@ Important variables:
 | `CHUNKING_STRATEGY`            | `simple` or `structure`                  |
 | `CHUNK_SIZE` / `CHUNK_OVERLAP` | chunk sizing for indexing                |
 | `EMBEDDING_MODEL`              | Sentence Transformer model               |
-| `EMBEDDING_DEVICE`             | `cpu` or `cuda`                          |
 | `POST_BM25_RERANK`             | enable BM25 re-ranking                   |
 | `OLLAMA_MODEL`                 | model served by Ollama                   |
 | `RAG_QUESTION_LIMIT`           | number of questions in the measured load |
@@ -66,7 +65,6 @@ showcase-rag-greenmetrics
 ├── README.md                   # overview and guide selection
 ├── README.linux.md             # local Linux measurement guide
 ├── README.windows.md           # hosted-service guide for Windows users
-├── .env.example                # committed default runtime configuration
 ├── docker-compose.gmt.yml      # Compose file for GMT scenarios
 ├── docker-compose.yml          # local app execution without GMT
 ├── docker/

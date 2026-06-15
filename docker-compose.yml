@@ -4,8 +4,6 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     container_name: showcase-rag-app
-    env_file:
-      - .env.example
     ports:
       - "8000:8000"
     volumes:
@@ -22,8 +20,8 @@ services:
   ollama:
     container_name: showcase-ollama
     image: ollama/ollama@sha256:d4188c1dfa870386a14e299976aed96daeb83876b69e1a852c9d09ea76463b9f
-    env_file:
-      - .env.example
+    environment:
+      OLLAMA_MODEL: llama3:8b
     ports:
       - "11434:11434"
     volumes:

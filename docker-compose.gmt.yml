@@ -4,31 +4,23 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     container_name: showcase-rag-app
-    env_file:
-      - .env.example
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./src/data:/src/data
-      - ./src/scripts:/src/scripts:ro
-      - ./hf-cache:/root/.cache/huggingface
-      - ./logs:/logs
-      - ./emb_models:/emb_models
+    environment:
+      CHUNKING_STRATEGY: "simple"
+      CHUNK_SIZE: 512
+      CHUNK_OVERLAP: 64
+      METADATA_FILTER: "False"
+      METADATA_ENHANCEMENT: "False"
+      POST_BM25_RERANK: "False"
+      OLLAMA_MODEL: "llama3:8b"
+      RAG_QUESTION_LIMIT: 8
+      MAX_TOKENS: 512
     depends_on:
       - ollama
 
   ollama:
     container_name: showcase-ollama
-    image: ollama/ollama@sha256:d4188c1dfa870386a14e299976aed96daeb83876b69e1a852c9d09ea76463b9f
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama-data:/root/.ollama
-      - ./docker/entrypoint.sh:/entrypoint.sh:ro
-    env_file:
-      - .env.example
-    restart: unless-stopped
-    entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
-
-volumes:
-  ollama-data:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.ollama
+    environment:
+      OLLAMA_MODEL: llama3:8b

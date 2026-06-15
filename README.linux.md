@@ -1,20 +1,16 @@
 # Linux Local Measurement Guide
 
-Use this guide when running the showcase on a Linux machine with a local Green Metrics Tool installation.
+Use this guide when running the showcase on a Linux machine with a local Green Metrics Tool installation and an NVIDIA GPU.
 
-Local Linux measurements are the best option if you want to compare several RAG configurations on the same host and inspect the results in your own GMT dashboard.
+For installing and configuring GMT itself, follow the official [Installation on Linux](https://docs.green-coding.io/docs/installation/installation-linux/) guide. This README assumes that GMT is already installed, Docker works with GMT, the relevant GMT metric providers are configured, and the local GMT services can be started successfully.
 
-## Prerequisites
+Local Linux measurements are intended for systems where the RAG workload can use an NVIDIA GPU and GMT can measure it through NVML. Without GPU measurements, local runs can still be useful for development checks, but they are less meaningful for comparing LLM-heavy RAG configurations. In that case, prefer the hosted-service workflow in [README.windows.md](README.windows.md).
 
-- local Green Metrics Tool installation
-- Python 3, `python3-venv`, `pip`, `git`, `curl`, `make`, `gcc`, `iproute2`
-- Docker Engine including Buildx and the Compose plugin
-- a running Docker daemon
-- Docker access for the current user, typically through the `docker` group, so GMT does not need to run as root
-- running GMT Docker services from the `docker/` folder of the GMT installation
-- available metric providers on the host, for example RAPL for CPU/RAM and optionally NVIDIA/NVML for GPU measurements
+For this showcase, the relevant GMT metric providers are:
 
-A machine without a dedicated GPU can still run the showcase. GPU metrics are simply not available and local LLM generation may be slower.
+- [NVIDIA NVML for GPU energy](https://docs.green-coding.io/docs/measuring/metric-providers/gpu-energy-nvidia-nvml-component/)
+- [RAPL for CPU package energy](https://docs.green-coding.io/docs/measuring/metric-providers/cpu-energy-rapl-msr-component/)
+- [RAPL for memory/RAM energy](https://docs.green-coding.io/docs/measuring/metric-providers/memory-energy-rapl-msr-component/)
 
 ## Clone The Repository
 
@@ -24,11 +20,11 @@ git clone <repository-url> showcase-rag-greenmetrics
 cd showcase-rag-greenmetrics
 ```
 
-The committed default configuration lives in [.env.example](.env.example). The Compose files use this file directly so the showcase and the hosted service work without extra setup. For local experiments, edit the `environment` values in [usage_scenario.local.yml](usage_scenario.local.yml); a private `.env` file is ignored by Git, but it is not loaded by default.
+The RAG app provides defaults in [src/app/config.yaml](src/app/config.yaml). For local GMT experiments, edit the `environment` values in [usage_scenario.local.yml](usage_scenario.local.yml).
 
 ## Prepare The Workload
 
-Download the fixed document set once before running comparisons. This keeps network transfer out of the measured workflow.
+Download the fixed document set once before running local comparisons. This keeps dataset transfer out of the measured GMT workflow.
 
 ```shell
 cd /path/to/showcase-rag-greenmetrics
@@ -37,9 +33,9 @@ docker exec showcase-rag-app python scripts/get_dataset.py --force
 docker compose --profile app down
 ```
 
-## Optional App Smoke Test
+## Optional App Check
 
-This step is useful before starting GMT measurements.
+Before starting a GMT measurement, you can run the RAG app once to check that Docker, Ollama, indexing, and the API work together.
 
 ```shell
 cd /path/to/showcase-rag-greenmetrics
@@ -61,30 +57,14 @@ docker compose --profile app down
 
 ## Measure With Local GMT
 
-Start the local GMT services:
-
-```shell
-cd /path/to/green-metrics-tool/docker
-docker compose up -d
-```
-
-Make sure the workload has been downloaded:
-
-```shell
-cd /path/to/showcase-rag-greenmetrics
-docker compose --profile app up --build -d
-docker exec showcase-rag-app python scripts/get_dataset.py --force
-docker compose --profile app down
-```
-
-Run the local scenario:
+Start the local GMT services as described in the official GMT installation guide. Then run the local showcase scenario from the GMT installation directory:
 
 ```shell
 cd /path/to/green-metrics-tool
 python3 runner.py --uri /path/to/showcase-rag-greenmetrics --filename usage_scenario.local.yml --name rag-local --allow-unsafe
 ```
 
-The report appears in the local GMT dashboard. Use the dashboard to inspect the run or compare several runs.
+The report appears in the local GMT dashboard (default: http://metrics.green-coding.internal:9142). Use the dashboard to inspect the run or compare several runs.
 
 ## Change RAG Configuration Locally
 
@@ -102,3 +82,8 @@ Edit the `environment` values in [usage_scenario.local.yml](usage_scenario.local
 | `MAX_TOKENS` | `256`, `512` |
 
 When changing `OLLAMA_MODEL`, set it for both `rag-app` and `ollama` in the scenario file.
+
+## Sources
+
+- [GMT Installation on Linux](https://docs.green-coding.io/docs/installation/installation-linux/)
+- [Measuring locally with GMT](https://docs.green-coding.io/docs/measuring/measuring-locally/)
