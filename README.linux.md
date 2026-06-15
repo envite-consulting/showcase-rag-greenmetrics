@@ -34,6 +34,7 @@ docker compose --profile app up --build
 In a second terminal:
 
 ```shell
+docker exec showcase-ollama ollama pull llama3:8b
 docker exec showcase-rag-app python scripts/get_dataset.py --force
 docker exec showcase-rag-app python -m app.indexing
 curl -X POST "http://localhost:8000/ask" -H "Content-Type: application/json" -d "{\"q_id\":\"manual-001\",\"question\":\"What is the nature of gravity in string theory at high energies?\"}"

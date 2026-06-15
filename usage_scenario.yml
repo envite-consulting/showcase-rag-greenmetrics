@@ -46,6 +46,14 @@ flow:
         log-stdout: true
         read-notes-stdout: true
 
+  - name: Pull Ollama Model
+    container: ollama
+    commands:
+      - type: console
+        command: sh -c 'ollama pull "$OLLAMA_MODEL"'
+        log-stdout: true
+        read-notes-stdout: true
+
   - name: Warmup RAG
     container: rag-app
     commands:

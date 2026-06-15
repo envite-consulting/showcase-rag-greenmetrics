@@ -25,8 +25,9 @@ Both scenarios measure these phases:
 1. `Prepare Dataset`
 2. `Warmup Indexing`
 3. `Indexing`
-4. `Warmup RAG`
-5. `RAG Queries`
+4. `Pull Ollama Model`
+5. `Warmup RAG`
+6. `RAG Queries`
 
 The `Prepare Dataset` phase downloads the fixed document set inside the measured container before indexing.
 
@@ -69,8 +70,7 @@ showcase-rag-greenmetrics
 ├── docker-compose.gmt.yml      # Compose file for GMT scenarios
 ├── docker-compose.yml          # local app execution without GMT
 ├── docker/
-│   ├── Dockerfile
-│   └── entrypoint.sh
+│   └── Dockerfile
 ├── emb_models/                 # local embedding cache
 ├── hf-cache/                   # Hugging Face cache
 ├── logs/

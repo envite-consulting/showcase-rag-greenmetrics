@@ -26,9 +26,7 @@ services:
       - "11434:11434"
     volumes:
       - ollama-data:/root/.ollama
-      - ./docker/entrypoint.sh:/entrypoint.sh:ro
     restart: unless-stopped
-    entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
     profiles:
       - app
 

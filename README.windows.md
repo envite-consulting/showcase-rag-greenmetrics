@@ -25,8 +25,9 @@ This keeps the remote run lightweight while still demonstrating the full RAG wor
 1. `Prepare Dataset`
 2. `Warmup Indexing`
 3. `Indexing`
-4. `Warmup RAG`
-5. `RAG Queries`
+4. `Pull Ollama Model`
+5. `Warmup RAG`
+6. `RAG Queries`
 
 The dataset preparation step is part of the hosted scenario because the GMT server clones the repository fresh for each execution. As a result, the dataset must be downloaded during every hosted run.
 
