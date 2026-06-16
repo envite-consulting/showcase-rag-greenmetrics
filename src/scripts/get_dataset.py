@@ -9,7 +9,7 @@ DEFAULT_OUT_DIR = "/src/data/raw"
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Download a small, fixed arXiv subset for the showcase.")
+    parser = argparse.ArgumentParser(description="Download a fixed arXiv subset for the showcase.")
     parser.add_argument("--selection", default=DATASET_SELECTION_PATH)
     parser.add_argument("--out-dir", default=DEFAULT_OUT_DIR)
     parser.add_argument("--force", action="store_true", help="Replace existing arXiv text files.")
@@ -60,10 +60,10 @@ def main():
 
             missing.remove(doc_id)
             found += 1
+            pbar.update(1)
 
             if not missing:
                 break
-            pbar.update(1)
 
     if missing:
         raise RuntimeError(

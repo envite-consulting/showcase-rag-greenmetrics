@@ -1,29 +1,29 @@
 ---
-name: RAG Showcase - Remote Default
+name: RAG Showcase - Full Enhanced Retrieval
 author: envite Consulting GmbH
-description: Small default scenario for the Green Metrics Tool hosted service. Uses a tiny Ollama model and a reduced question set so remote showcase runs stay lightweight.
+description: Full hosted-service scenario for comparing a more structured retrieval configuration against the baseline in the GMT dashboard.
 
 compose-file: !include docker-compose.gmt.yml
 
 services:
   rag-app:
     environment:
-      CHUNKING_STRATEGY: "simple"
+      CHUNKING_STRATEGY: "structure"
       CHUNK_SIZE: 192
       CHUNK_OVERLAP: 24
-      METADATA_FILTER: "False"
-      METADATA_ENHANCEMENT: "False"
-      POST_BM25_RERANK: "False"
-      OLLAMA_MODEL: "tinyllama:1.1b"
-      RAG_QUESTION_LIMIT: 4
-      MAX_TOKENS: 256
+      POST_BM25_RERANK: "True"
+      TOP_K: 5
+      OLLAMA_MODEL: "llama3:8b"
+      RAG_QUESTIONS_PATH: "/src/scripts/questions.demo.json"
+      RAG_QUESTION_LIMIT: 0
+      MAX_TOKENS: 512
 
 flow:
   - name: Prepare Dataset
     container: rag-app
     commands:
       - type: console
-        command: python scripts/get_dataset.py --force
+        command: python scripts/get_dataset.py --selection scripts/dataset.demo.json --force
         log-stdout: true
         read-notes-stdout: true
 

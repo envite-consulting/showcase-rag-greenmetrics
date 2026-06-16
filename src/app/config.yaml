@@ -6,8 +6,8 @@ log_dir: "/logs"
 
 # Chunking
 chunking_strategy: "simple"  # simple | structure
-chunk_size: 512
-chunk_overlap: 64
+chunk_size: 192
+chunk_overlap: 24
 
 # Embedding
 embedding_model: "sentence-transformers/all-MiniLM-L6-v2"

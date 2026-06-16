@@ -59,40 +59,67 @@ def _load_documents(data_dir: str) -> List[RawDocument]:
 # ========== CHUNKING ==========
 #
 # Implemented chunking strategies:
-# 1. _simple_chunk(): fixed chunk size and overlap.
-# 2. _structure_chunk(): chunking based on document structure.
+# 1. _simple_chunk(): fixed token chunk size and overlap.
+# 2. _structure_chunk(): token chunking based on document structure.
 
-def _simple_chunk(doc: RawDocument, chunk_size: int, chunk_overlap: int) -> List[RawDocument]:
+def _token_chunk_ranges(text: str, tokenizer: Any, chunk_size: int, chunk_overlap: int) -> List[tuple[int, int]]:
+    encoded = tokenizer(
+        text,
+        add_special_tokens=False,
+        return_offsets_mapping=True,
+        truncation=False,
+    )
+    offsets = encoded["offset_mapping"]
+
+    if not offsets:
+        return []
+
+    ranges: list[tuple[int, int]] = []
+    start_token = 0
+    step = max(1, chunk_size - chunk_overlap)
+
+    while start_token < len(offsets):
+        end_token = min(start_token + chunk_size, len(offsets))
+        token_offsets = [(start, end) for start, end in offsets[start_token:end_token] if end > start]
+
+        if token_offsets:
+            ranges.append((token_offsets[0][0], token_offsets[-1][1]))
+
+        if end_token == len(offsets):
+            break
+
+        start_token += step
+
+    return ranges
+
+
+def _simple_chunk(doc: RawDocument, chunk_size: int, chunk_overlap: int, tokenizer: Any) -> List[RawDocument]:
     """
-    Simple chunking strategy with fixed chunk size and fixed chunk overlap.
+    Simple token-based chunking strategy with fixed chunk size and fixed chunk overlap.
     :param doc: Raw text document.
-    :param chunk_size: Chunk size.
-    :param chunk_overlap: Overlap between chunks.
+    :param chunk_size: Chunk size in tokens.
+    :param chunk_overlap: Overlap between chunks in tokens.
+    :param tokenizer: Tokenizer used by the embedding model.
     :return: List of chunked documents.
     """
     text = doc.text
     chunks: list[RawDocument] = []
     chunk_index = 0
 
-    start = 0
-    step = max(1, chunk_size - chunk_overlap)
-
-    while start < len(text):
-        end = start + chunk_size
+    for start, end in _token_chunk_ranges(text, tokenizer, chunk_size, chunk_overlap):
         chunk_text = text[start:end]
         metadata = dict(doc.metadata)
         metadata["chunk_index"] = chunk_index
         metadata["chunk_start"] = start
-        metadata["chunk_end"] = min(end, len(text))
+        metadata["chunk_end"] = end
         if chunk_text.strip():
             chunks.append(RawDocument(text=chunk_text, metadata=metadata))
         chunk_index += 1
-        start += step
 
     return chunks
 
 
-def _structure_chunk(doc: RawDocument, chunk_size: int, chunk_overlap: int) -> List[RawDocument]:
+def _structure_chunk(doc: RawDocument, chunk_size: int, chunk_overlap: int, tokenizer: Any) -> List[RawDocument]:
     """
     Chunking based on the Markdown structure of the arXiv documents.
     Sections use # through ##### markers; special blocks use ###### markers
@@ -100,8 +127,9 @@ def _structure_chunk(doc: RawDocument, chunk_size: int, chunk_overlap: int) -> L
     Block information such as type and title is stored as chunk metadata
     together with the chunk start and end offsets.
     :param doc: Raw text document.
-    :param chunk_size: Maximum chunk size.
-    :param chunk_overlap: Overlap between chunks.
+    :param chunk_size: Maximum chunk size in tokens.
+    :param chunk_overlap: Overlap between chunks in tokens.
+    :param tokenizer: Tokenizer used by the embedding model.
     :return: List of chunked documents.
     """
     from app.block_types import ALLOWED_BLOCK_TYPES, BLOCK_TYPES_ALIASES
@@ -152,18 +180,11 @@ def _structure_chunk(doc: RawDocument, chunk_size: int, chunk_overlap: int) -> L
         if not block_text.strip():
             return
 
-        start = 0
-        while start < len(block_text):
-            end = min(start + chunk_size, len(block_text))
+        for start, end in _token_chunk_ranges(block_text, tokenizer, chunk_size, chunk_overlap):
             chunk_text = block_text[start:end]
 
             if chunk_text.strip():
                 emit_chunk(chunk_text, block_start + start, block_start + end)
-
-            if end == len(block_text):
-                break
-
-            start = end - chunk_overlap if chunk_overlap > 0 else end
 
     pos = 0
     for line in text.splitlines(keepends=True):
@@ -222,6 +243,12 @@ def _build_index(cfg: Config | None = None, reset_db: bool = False) -> None:
     if reset_db:
         reset_index_dir(cfg.index_dir)
 
+    logger.info(f"Loading embedding model {cfg.embedding_model} ...")
+    model = get_embed_model(cfg)
+    tokenizer = getattr(model, "tokenizer", None)
+    if tokenizer is None:
+        raise ValueError(f"Embedding model {cfg.embedding_model} does not expose a tokenizer.")
+
     # ========== 1. Load documents ==========
     logger.info(f"Loading documents from {cfg.data_dir} ...")
     docs = _load_documents(cfg.data_dir)
@@ -240,7 +267,12 @@ def _build_index(cfg: Config | None = None, reset_db: bool = False) -> None:
 
     mark("CHUNKING_START")
     for doc in docs:
-        chunked_docs.extend(chunk_func(doc, chunk_size=cfg.chunk_size, chunk_overlap=cfg.chunk_overlap))
+        chunked_docs.extend(chunk_func(
+            doc,
+            chunk_size=cfg.chunk_size,
+            chunk_overlap=cfg.chunk_overlap,
+            tokenizer=tokenizer,
+        ))
     mark("CHUNKING_END")
 
     logger.info(f"Created {len(chunked_docs)} chunks.")
@@ -250,9 +282,6 @@ def _build_index(cfg: Config | None = None, reset_db: bool = False) -> None:
         return
 
     # ========== 3. Embed documents ==========
-    logger.info(f"Loading embedding model {cfg.embedding_model} ...")
-    model = get_embed_model(cfg)
-
     texts = [d.text for d in chunked_docs]
     logger.info("Computing embeddings ...")
     mark("EMBEDDING_START")
@@ -269,7 +298,6 @@ def _build_index(cfg: Config | None = None, reset_db: bool = False) -> None:
     logger.info(f"Creating Chroma DB in {cfg.index_dir} ...")
     client = chromadb.PersistentClient(path=cfg.index_dir)
 
-    # See https://cookbook.chromadb.dev/core/collections/.
     # See https://cookbook.chromadb.dev/core/configuration/ for metadata details.
     collection = client.get_or_create_collection(
         "rag",

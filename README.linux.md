@@ -64,7 +64,7 @@ Edit the `environment` values in [usage_scenario.local.yml](usage_scenario.local
 | Variable | Example values |
 | --- | --- |
 | `CHUNKING_STRATEGY` | `simple`, `structure` |
-| `CHUNK_SIZE` / `CHUNK_OVERLAP` | `512` / `64`, `256` / `32` |
+| `CHUNK_SIZE` / `CHUNK_OVERLAP` | `192` / `24`, `128` / `16` |
 | `METADATA_FILTER` | `True`, `False` |
 | `METADATA_ENHANCEMENT` | `True`, `False` |
 | `POST_BM25_RERANK` | `True`, `False` |

@@ -1,0 +1,302 @@
+[
+  {
+    "q_id": "q001",
+    "question": "In the paper \"Deeply Learned Robust Matrix Completion for Large-scale Low-rank Data Recovery\", what main problem or task is addressed?",
+    "gold_doc": "arxiv_2501.00677.txt",
+    "source_title": "Deeply Learned Robust Matrix Completion for Large-scale Low-rank Data Recovery"
+  },
+  {
+    "q_id": "q002",
+    "question": "According to \"Controlled Causal Hallucinations Can Estimate Phantom Nodes in Multiexpert Mixtures of Fuzzy Cognitive Maps\", what method, model, or approach is proposed?",
+    "gold_doc": "arxiv_2501.00673.txt",
+    "source_title": "Controlled Causal Hallucinations Can Estimate Phantom Nodes in Multiexpert Mixtures of Fuzzy Cognitive Maps"
+  },
+  {
+    "q_id": "q003",
+    "question": "What key result or contribution is described in \"Leaf diseases detection using deep learning methods\"?",
+    "gold_doc": "arxiv_2501.00669.txt",
+    "source_title": "Leaf diseases detection using deep learning methods"
+  },
+  {
+    "q_id": "q004",
+    "question": "Which evaluation, experiment, or evidence is discussed in \"Grade Inflation in Generative Models\"?",
+    "gold_doc": "arxiv_2501.00664.txt",
+    "source_title": "Grade Inflation in Generative Models"
+  },
+  {
+    "q_id": "q005",
+    "question": "What limitation, challenge, or motivation is mentioned in \"Titans: Learning to Memorize at Test Time\"?",
+    "gold_doc": "arxiv_2501.00663.txt",
+    "source_title": "Titans: Learning to Memorize at Test Time"
+  },
+  {
+    "q_id": "q006",
+    "question": "In the paper \"Why Are Positional Encodings Nonessential for Deep Autoregressive Transformers? Revisiting a Petroglyph\", what main problem or task is addressed?",
+    "gold_doc": "arxiv_2501.00659.txt",
+    "source_title": "Why Are Positional Encodings Nonessential for Deep Autoregressive Transformers? Revisiting a Petroglyph"
+  },
+  {
+    "q_id": "q007",
+    "question": "According to \"Understanding and Mitigating Bottlenecks of State Space Models through the Lens of Recency and Over-smoothing\", what method, model, or approach is proposed?",
+    "gold_doc": "arxiv_2501.00658.txt",
+    "source_title": "Understanding and Mitigating Bottlenecks of State Space Models through the Lens of Recency and Over-smoothing"
+  },
+  {
+    "q_id": "q008",
+    "question": "What key result or contribution is described in \"2 OLMo 2 Furious\"?",
+    "gold_doc": "arxiv_2501.00656.txt",
+    "source_title": "2 OLMo 2 Furious"
+  },
+  {
+    "q_id": "q009",
+    "question": "Which evaluation, experiment, or evidence is discussed in \"Finding Missed Code Size Optimizations in Compilers using LLMs\"?",
+    "gold_doc": "arxiv_2501.00655.txt",
+    "source_title": "Finding Missed Code Size Optimizations in Compilers using LLMs"
+  },
+  {
+    "q_id": "q010",
+    "question": "What limitation, challenge, or motivation is mentioned in \"ICONS: Influence Consensus for Vision-Language Data Selection\"?",
+    "gold_doc": "arxiv_2501.00654.txt",
+    "source_title": "ICONS: Influence Consensus for Vision-Language Data Selection"
+  },
+  {
+    "q_id": "q011",
+    "question": "In the paper \"Taming Feed-forward Reconstruction Models as Latent Encoders for 3D Generative Models\", what main problem or task is addressed?",
+    "gold_doc": "arxiv_2501.00651.txt",
+    "source_title": "Taming Feed-forward Reconstruction Models as Latent Encoders for 3D Generative Models"
+  },
+  {
+    "q_id": "q012",
+    "question": "According to \"SoundBrush: Sound as a Brush for Visual Scene Editing\", what method, model, or approach is proposed?",
+    "gold_doc": "arxiv_2501.00645.txt",
+    "source_title": "SoundBrush: Sound as a Brush for Visual Scene Editing"
+  },
+  {
+    "q_id": "q013",
+    "question": "What key result or contribution is described in \"Efficient Standardization of Clinical Notes using Large Language Models\"?",
+    "gold_doc": "arxiv_2501.00644.txt",
+    "source_title": "Efficient Standardization of Clinical Notes using Large Language Models"
+  },
+  {
+    "q_id": "q014",
+    "question": "Which evaluation, experiment, or evidence is discussed in \"Enabling New HDLs with Agents\"?",
+    "gold_doc": "arxiv_2501.00642.txt",
+    "source_title": "Enabling New HDLs with Agents"
+  },
+  {
+    "q_id": "q015",
+    "question": "What limitation, challenge, or motivation is mentioned in \"Flash-Split: 2D Reflection Removal with Flash Cues and Latent Diffusion Separation\"?",
+    "gold_doc": "arxiv_2501.00637.txt",
+    "source_title": "Flash-Split: 2D Reflection Removal with Flash Cues and Latent Diffusion Separation"
+  },
+  {
+    "q_id": "q016",
+    "question": "In the paper \"Applying Graph Explanation to Operator Fusion\", what main problem or task is addressed?",
+    "gold_doc": "arxiv_2501.00636.txt",
+    "source_title": "Applying Graph Explanation to Operator Fusion"
+  },
+  {
+    "q_id": "q017",
+    "question": "According to \"Fuzzy Model Identification and Self Learning with Smooth Compositions\", what method, model, or approach is proposed?",
+    "gold_doc": "arxiv_2501.01994.txt",
+    "source_title": "Fuzzy Model Identification and Self Learning with Smooth Compositions"
+  },
+  {
+    "q_id": "q018",
+    "question": "What key result or contribution is described in \"Different thresholding methods on Nearest Shrunken Centroid algorithm\"?",
+    "gold_doc": "arxiv_2501.00632.txt",
+    "source_title": "Different thresholding methods on Nearest Shrunken Centroid algorithm"
+  },
+  {
+    "q_id": "q019",
+    "question": "Which evaluation, experiment, or evidence is discussed in \"Matrix factorization and prediction for high dimensional co-occurrence count data via shared parameter alternating zero inflated Gamma model\"?",
+    "gold_doc": "arxiv_2501.00628.txt",
+    "source_title": "Matrix factorization and prediction for high dimensional co-occurrence count data via shared parameter alternating zero inflated Gamma model"
+  },
+  {
+    "q_id": "q020",
+    "question": "What limitation, challenge, or motivation is mentioned in \"LLM-MedQA: Enhancing Medical Question Answering through Case Studies in Large Language Models\"?",
+    "gold_doc": "arxiv_2501.05464.txt",
+    "source_title": "LLM-MedQA: Enhancing Medical Question Answering through Case Studies in Large Language Models"
+  },
+  {
+    "q_id": "q021",
+    "question": "In the paper \"Global dense vector representations for words or items using shared parameter alternating Tweedie model\", what main problem or task is addressed?",
+    "gold_doc": "arxiv_2501.00623.txt",
+    "source_title": "Global dense vector representations for words or items using shared parameter alternating Tweedie model"
+  },
+  {
+    "q_id": "q022",
+    "question": "According to \"A Study on Context Length and Efficient Transformers for Biomedical Image Analysis\", what method, model, or approach is proposed?",
+    "gold_doc": "arxiv_2501.00619.txt",
+    "source_title": "A Study on Context Length and Efficient Transformers for Biomedical Image Analysis"
+  },
+  {
+    "q_id": "q023",
+    "question": "What key result or contribution is described in \"Toward Corpus Size Requirements for Training and Evaluating Depression Risk Models Using Spoken Language\"?",
+    "gold_doc": "arxiv_2501.00617.txt",
+    "source_title": "Toward Corpus Size Requirements for Training and Evaluating Depression Risk Models Using Spoken Language"
+  },
+  {
+    "q_id": "q024",
+    "question": "Which evaluation, experiment, or evidence is discussed in \"Predicting Barge Presence and Quantity on Inland Waterways using Vessel Tracking Data: A Machine Learning Approach\"?",
+    "gold_doc": "arxiv_2501.00615.txt",
+    "source_title": "Predicting Barge Presence and Quantity on Inland Waterways using Vessel Tracking Data: A Machine Learning Approach"
+  },
+  {
+    "q_id": "q025",
+    "question": "What limitation, challenge, or motivation is mentioned in \"Optimizing Speech-Input Length for Speaker-Independent Depression Classification\"?",
+    "gold_doc": "arxiv_2501.00608.txt",
+    "source_title": "Optimizing Speech-Input Length for Speaker-Independent Depression Classification"
+  },
+  {
+    "q_id": "q026",
+    "question": "In the paper \"Time-Varying Graph Learning for Data with Heavy-Tailed Distribution\", what main problem or task is addressed?",
+    "gold_doc": "arxiv_2501.00606.txt",
+    "source_title": "Time-Varying Graph Learning for Data with Heavy-Tailed Distribution"
+  },
+  {
+    "q_id": "q027",
+    "question": "According to \"DiC: Rethinking Conv3x3 Designs in Diffusion Models\", what method, model, or approach is proposed?",
+    "gold_doc": "arxiv_2501.00603.txt",
+    "source_title": "DiC: Rethinking Conv3x3 Designs in Diffusion Models"
+  },
+  {
+    "q_id": "q028",
+    "question": "What key result or contribution is described in \"STORM: Spatio-Temporal Reconstruction Model for Large-Scale Outdoor Scenes\"?",
+    "gold_doc": "arxiv_2501.00602.txt",
+    "source_title": "STORM: Spatio-Temporal Reconstruction Model for Large-Scale Outdoor Scenes"
+  },
+  {
+    "q_id": "q029",
+    "question": "Which evaluation, experiment, or evidence is discussed in \"DreamDrive: Generative 4D Scene Modeling from Street View Images\"?",
+    "gold_doc": "arxiv_2501.00601.txt",
+    "source_title": "DreamDrive: Generative 4D Scene Modeling from Street View Images"
+  },
+  {
+    "q_id": "q030",
+    "question": "What limitation, challenge, or motivation is mentioned in \"VideoRefer Suite: Advancing Spatial-Temporal Object Understanding with Video LLM\"?",
+    "gold_doc": "arxiv_2501.00599.txt",
+    "source_title": "VideoRefer Suite: Advancing Spatial-Temporal Object Understanding with Video LLM"
+  },
+  {
+    "q_id": "q031",
+    "question": "In the paper \"\"Dialogue\" vs \"Dialog\" in NLP and AI research: Statistics from a Confused Discourse\", what main problem or task is addressed?",
+    "gold_doc": "arxiv_2501.00598.txt",
+    "source_title": "\"Dialogue\" vs \"Dialog\" in NLP and AI research: Statistics from a Confused Discourse"
+  },
+  {
+    "q_id": "q032",
+    "question": "According to \"Gaze Prediction as a Function of Eye Movement Type and Individual Differences\", what method, model, or approach is proposed?",
+    "gold_doc": "arxiv_2501.00597.txt",
+    "source_title": "Gaze Prediction as a Function of Eye Movement Type and Individual Differences"
+  },
+  {
+    "q_id": "q033",
+    "question": "What key result or contribution is described in \"Unbiased GNN Learning via Fairness-Aware Subgraph Diffusion\"?",
+    "gold_doc": "arxiv_2501.00595.txt",
+    "source_title": "Unbiased GNN Learning via Fairness-Aware Subgraph Diffusion"
+  },
+  {
+    "q_id": "q034",
+    "question": "Which evaluation, experiment, or evidence is discussed in \"A Novel Convolution and Attention Mechanism-based Model for 6D Object Pose Estimation\"?",
+    "gold_doc": "arxiv_2501.01993.txt",
+    "source_title": "A Novel Convolution and Attention Mechanism-based Model for 6D Object Pose Estimation"
+  },
+  {
+    "q_id": "q035",
+    "question": "What limitation, challenge, or motivation is mentioned in \"Setting Standards in Turkish NLP: TR-MMLU for Large Language Model Evaluation\"?",
+    "gold_doc": "arxiv_2501.00593.txt",
+    "source_title": "Setting Standards in Turkish NLP: TR-MMLU for Large Language Model Evaluation"
+  },
+  {
+    "q_id": "q036",
+    "question": "In the paper \"Advanced Lung Nodule Segmentation and Classification for Early Detection of Lung Cancer using SAM and Transfer Learning\", what main problem or task is addressed?",
+    "gold_doc": "arxiv_2501.00586.txt",
+    "source_title": "Advanced Lung Nodule Segmentation and Classification for Early Detection of Lung Cancer using SAM and Transfer Learning"
+  },
+  {
+    "q_id": "q037",
+    "question": "According to \"Sidewalk Hazard Detection Using Variational Autoencoder and One-Class SVM\", what method, model, or approach is proposed?",
+    "gold_doc": "arxiv_2501.00585.txt",
+    "source_title": "Sidewalk Hazard Detection Using Variational Autoencoder and One-Class SVM"
+  },
+  {
+    "q_id": "q038",
+    "question": "What key result or contribution is described in \"Online Video Understanding: OVBench and VideoChat-Online\"?",
+    "gold_doc": "arxiv_2501.00584.txt",
+    "source_title": "Online Video Understanding: OVBench and VideoChat-Online"
+  },
+  {
+    "q_id": "q039",
+    "question": "Which evaluation, experiment, or evidence is discussed in \"Are the Values of LLMs Structurally Aligned with Humans? A Causal Perspective\"?",
+    "gold_doc": "arxiv_2501.00581.txt",
+    "source_title": "Are the Values of LLMs Structurally Aligned with Humans? A Causal Perspective"
+  },
+  {
+    "q_id": "q040",
+    "question": "What limitation, challenge, or motivation is mentioned in \"VideoChat-Flash: Hierarchical Compression for Long-Context Video Modeling\"?",
+    "gold_doc": "arxiv_2501.00574.txt",
+    "source_title": "VideoChat-Flash: Hierarchical Compression for Long-Context Video Modeling"
+  },
+  {
+    "q_id": "q041",
+    "question": "In the paper \"KnowRA: Knowledge Retrieval Augmented Method for Document-level Relation Extraction with Comprehensive Reasoning Abilities\", what main problem or task is addressed?",
+    "gold_doc": "arxiv_2501.00571.txt",
+    "source_title": "KnowRA: Knowledge Retrieval Augmented Method for Document-level Relation Extraction with Comprehensive Reasoning Abilities"
+  },
+  {
+    "q_id": "q042",
+    "question": "According to \"Probing Visual Language Priors in VLMs\", what method, model, or approach is proposed?",
+    "gold_doc": "arxiv_2501.00569.txt",
+    "source_title": "Probing Visual Language Priors in VLMs"
+  },
+  {
+    "q_id": "q043",
+    "question": "What key result or contribution is described in \"Sampling from multi-modal distributions with polynomial query complexity in fixed dimension via reverse diffusion\"?",
+    "gold_doc": "arxiv_2501.00565.txt",
+    "source_title": "Sampling from multi-modal distributions with polynomial query complexity in fixed dimension via reverse diffusion"
+  },
+  {
+    "q_id": "q044",
+    "question": "Which evaluation, experiment, or evidence is discussed in \"An Overview and Discussion on Using Large Language Models for Implementation Generation of Solutions to Open-Ended Problems\"?",
+    "gold_doc": "arxiv_2501.00562.txt",
+    "source_title": "An Overview and Discussion on Using Large Language Models for Implementation Generation of Solutions to Open-Ended Problems"
+  },
+  {
+    "q_id": "q045",
+    "question": "What limitation, challenge, or motivation is mentioned in \"Re-evaluating Automatic LLM System Ranking for Alignment with Human Preference\"?",
+    "gold_doc": "arxiv_2501.00560.txt",
+    "source_title": "Re-evaluating Automatic LLM System Ranking for Alignment with Human Preference"
+  },
+  {
+    "q_id": "q046",
+    "question": "In the paper \"Estimation of 3T MR images from 1.5T images regularized with Physics based Constraint\", what main problem or task is addressed?",
+    "gold_doc": "arxiv_2501.01464.txt",
+    "source_title": "Estimation of 3T MR images from 1.5T images regularized with Physics based Constraint"
+  },
+  {
+    "q_id": "q047",
+    "question": "According to \"AraSTEM: A Native Arabic Multiple Choice Question Benchmark for Evaluating LLMs Knowledge In STEM Subjects\", what method, model, or approach is proposed?",
+    "gold_doc": "arxiv_2501.00559.txt",
+    "source_title": "AraSTEM: A Native Arabic Multiple Choice Question Benchmark for Evaluating LLMs Knowledge In STEM Subjects"
+  },
+  {
+    "q_id": "q048",
+    "question": "What key result or contribution is described in \"Finding the Underlying Viscoelastic Constitutive Equation via Universal Differential Equations and Differentiable Physics\"?",
+    "gold_doc": "arxiv_2501.00556.txt",
+    "source_title": "Finding the Underlying Viscoelastic Constitutive Equation via Universal Differential Equations and Differentiable Physics"
+  },
+  {
+    "q_id": "q049",
+    "question": "Which evaluation, experiment, or evidence is discussed in \"Prune 'n Predict: Optimizing LLM Decision-making with Conformal Prediction\"?",
+    "gold_doc": "arxiv_2501.00555.txt",
+    "source_title": "Prune 'n Predict: Optimizing LLM Decision-making with Conformal Prediction"
+  },
+  {
+    "q_id": "q050",
+    "question": "What limitation, challenge, or motivation is mentioned in \"Proof Recommendation System for the HOL4 Theorem Prover\"?",
+    "gold_doc": "arxiv_2501.05463.txt",
+    "source_title": "Proof Recommendation System for the HOL4 Theorem Prover"
+  }
+]

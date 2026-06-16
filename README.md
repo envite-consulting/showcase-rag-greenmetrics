@@ -10,6 +10,7 @@ The showcase is intentionally small and self-contained. It uses a fixed arXiv do
 |-------------|---------------------------------|----------------------------------------|
 | Linux       | Run GMT locally                 | [README.linux.md](README.linux.md)     |
 | Windows     | Use the free GMT hosted service | [README.windows.md](README.windows.md) |
+| Live demo   | Prepared dashboard comparison   | [README.demo.md](README.demo.md)       |
 
 Windows users should use the hosted GMT service instead of local measurements. Local WSL runs are useful for development, but they can produce limited or inconsistent measurement data depending on host support for metric providers.
 
@@ -35,13 +36,17 @@ The fixed workload is defined by:
 
 - [src/scripts/dataset.json](src/scripts/dataset.json): selected arXiv document IDs
 - [src/scripts/questions.json](src/scripts/questions.json): questions used by the load script
+- [src/scripts/dataset.demo.json](src/scripts/dataset.demo.json): larger arXiv workload with 1000 explicit document IDs for prepared full-service demo measurements
+- [src/scripts/questions.demo.json](src/scripts/questions.demo.json): 50 document-specific single-turn questions for energy-measurement-focused demo runs
 
 ## Scenarios
 
-| File | Purpose |
-| --- | --- |
-| [usage_scenario.yml](usage_scenario.yml) | remote scenario for the GMT hosted service; defaults to `tinyllama:1.1b`, fewer questions, and shorter answers |
-| [usage_scenario.local.yml](usage_scenario.local.yml) | local Linux scenario; defaults to `llama3:8b` |
+| File                                                                 | Purpose |
+|----------------------------------------------------------------------| --- |
+| [usage_scenario.yml](usage_scenario.yml)                             | remote scenario for the GMT hosted service; defaults to `tinyllama:1.1b`, fewer questions, and shorter answers |
+| [usage_scenario.local.yml](usage_scenario.local.yml)                 | local Linux scenario; defaults to `llama3:8b` |
+| [usage_scenario.demo_baseline.yml](usage_scenario.demo_baseline.yml) | fuller hosted-service baseline with 1000 arXiv documents and 50 questions for prepared dashboard comparisons |
+| [usage_scenario.demo_enhanced.yml](usage_scenario.demo_enhanced.yml) | fuller hosted-service scenario with 1000 arXiv documents, 50 questions, structured retrieval, metadata handling, and BM25 re-ranking |
 
 The RAG app defaults are defined in [src/app/config.yaml](src/app/config.yaml). Variables declared in the `usage_scenario.*.yml` files override these defaults. For local Linux runs, edit [usage_scenario.local.yml](usage_scenario.local.yml) before starting the measurement. For hosted runs, keep [usage_scenario.yml](usage_scenario.yml) lightweight and adjust variables in the GMT Scenario Runner.
 
@@ -57,6 +62,7 @@ Important variables:
 | `CHUNK_SIZE` / `CHUNK_OVERLAP` | chunk sizing for indexing                |
 | `EMBEDDING_MODEL`              | Sentence Transformer model               |
 | `POST_BM25_RERANK`             | enable BM25 re-ranking                   |
+| `TOP_K`                        | number of retrieved text segments used as context |
 | `OLLAMA_MODEL`                 | model served by Ollama                   |
 | `RAG_QUESTION_LIMIT`           | number of questions in the measured load |
 
