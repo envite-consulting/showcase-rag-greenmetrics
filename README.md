@@ -46,7 +46,7 @@ The fixed workload is defined by:
 | [usage_scenario.yml](usage_scenario.yml)                             | remote scenario for the GMT hosted service; defaults to `tinyllama:1.1b`, fewer questions, and shorter answers |
 | [usage_scenario.local.yml](usage_scenario.local.yml)                 | local Linux scenario; defaults to `llama3:8b` |
 | [usage_scenario.demo_baseline.yml](usage_scenario.demo_baseline.yml) | fuller hosted-service baseline with 1000 arXiv documents and 50 questions for prepared dashboard comparisons |
-| [usage_scenario.demo_enhanced.yml](usage_scenario.demo_enhanced.yml) | fuller hosted-service scenario with 1000 arXiv documents, 50 questions, structured retrieval, metadata handling, and BM25 re-ranking |
+| [usage_scenario.demo_enhanced.yml](usage_scenario.demo_enhanced.yml) | fuller hosted-service scenario with 1000 arXiv documents, 50 questions, structured retrieval, and BM25 re-ranking |
 
 The RAG app defaults are defined in [src/app/config.yaml](src/app/config.yaml). Variables declared in the `usage_scenario.*.yml` files override these defaults. For local Linux runs, edit [usage_scenario.local.yml](usage_scenario.local.yml) before starting the measurement. For hosted runs, keep [usage_scenario.yml](usage_scenario.yml) lightweight and adjust variables in the GMT Scenario Runner.
 

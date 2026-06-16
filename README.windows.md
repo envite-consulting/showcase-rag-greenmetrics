@@ -52,7 +52,7 @@ Keep in mind that the free version of the hosted service has certain [limitation
 
 Use the hosted report from [usage_scenario.yml](usage_scenario.yml) as the baseline result.
 
-You can adjust the RAG configuration in the GMT Scenario Runner. Variables such as `CHUNKING_STRATEGY`, `CHUNK_SIZE`, `CHUNK_OVERLAP`, `METADATA_FILTER`, `METADATA_ENHANCEMENT`, `POST_BM25_RERANK`, `RAG_QUESTION_LIMIT`, and `MAX_TOKENS` are suitable for hosted experiments.
+You can adjust the RAG configuration in the GMT Scenario Runner. Variables such as `CHUNKING_STRATEGY`, `CHUNK_SIZE`, `CHUNK_OVERLAP`, `POST_BM25_RERANK`, `RAG_QUESTION_LIMIT`, and `MAX_TOKENS` are suitable for hosted experiments.
 
 Avoid large LLMs such as `llama3:8b` for hosted runs and keep `OLLAMA_MODEL=tinyllama:1.1b`.
 

@@ -65,8 +65,6 @@ Edit the `environment` values in [usage_scenario.local.yml](usage_scenario.local
 | --- | --- |
 | `CHUNKING_STRATEGY` | `simple`, `structure` |
 | `CHUNK_SIZE` / `CHUNK_OVERLAP` | `192` / `24`, `128` / `16` |
-| `METADATA_FILTER` | `True`, `False` |
-| `METADATA_ENHANCEMENT` | `True`, `False` |
 | `POST_BM25_RERANK` | `True`, `False` |
 | `OLLAMA_MODEL` | `llama3:8b`, `tinyllama:1.1b` |
 | `RAG_QUESTION_LIMIT` | `4`, `8`, `12` |

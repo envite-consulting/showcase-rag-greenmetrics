@@ -11,8 +11,6 @@ services:
       CHUNKING_STRATEGY: "simple"
       CHUNK_SIZE: 192
       CHUNK_OVERLAP: 24
-      METADATA_FILTER: "False"
-      METADATA_ENHANCEMENT: "False"
       POST_BM25_RERANK: "False"
       OLLAMA_MODEL: "llama3:8b"
       RAG_QUESTION_LIMIT: 8
