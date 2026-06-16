@@ -3,7 +3,7 @@ name: RAG Showcase - Full Baseline
 author: envite Consulting GmbH
 description: Full hosted-service baseline for comparing RAG configurations in the GMT dashboard. Keeps retrieval simple and uses a larger question workload than the lightweight default scenario.
 
-compose-file: !include docker-compose.gmt.yml
+compose-file: !include docker-compose.demo.yml
 
 services:
   rag-app:

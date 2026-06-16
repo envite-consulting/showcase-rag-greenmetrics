@@ -3,7 +3,7 @@ name: RAG Showcase - Full Enhanced Retrieval
 author: envite Consulting GmbH
 description: Full hosted-service scenario for comparing a more structured retrieval configuration against the baseline in the GMT dashboard.
 
-compose-file: !include docker-compose.gmt.yml
+compose-file: !include docker-compose.demo.yml
 
 services:
   rag-app:

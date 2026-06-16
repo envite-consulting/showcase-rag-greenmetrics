@@ -70,26 +70,28 @@ Important variables:
 
 ```text
 showcase-rag-greenmetrics
-├── README.md                   # overview and guide selection
-├── README.linux.md             # local Linux measurement guide
-├── README.windows.md           # hosted-service guide for Windows users
-├── docker-compose.gmt.yml      # Compose file for GMT scenarios
-├── docker-compose.yml          # local app execution without GMT
+├── README.md                         # overview and guide selection
+├── README.demo.md                    # live-demo plan and dashboard narrative
+├── README.linux.md                   # local Linux measurement guide
+├── README.windows.md                 # hosted-service guide for Windows users
+├── docker-compose.yml                # local app execution without GMT
+├── docker-compose.gmt.yml            # default GMT compose file
+├── docker-compose.demo.yml           # hosted GPU demo compose file
 ├── docker/
 │   └── Dockerfile
-├── emb_models/                 # local embedding cache
-├── hf-cache/                   # Hugging Face cache
-├── logs/
-├── src/app/                    # RAG app
-├── src/data/raw/               # downloaded arXiv texts
-├── src/scripts/
-│   ├── dataset.json            # fixed arXiv selection
-│   ├── get_dataset.py
-│   ├── pull_ollama_model.py
-│   ├── questions.json
-│   └── rag_queries.py
-├── usage_scenario.yml          # hosted-service scenario
-└── usage_scenario.local.yml    # local Linux scenario
+├── usage_scenario.yml                # lightweight hosted-service scenario
+├── usage_scenario.local.yml          # local Linux GMT scenario
+├── usage_scenario.demo_baseline.yml  # prepared demo baseline run
+├── usage_scenario.demo_enhanced.yml  # prepared demo comparison run
+├── requirements.txt
+├── src/
+│   ├── app/                          # RAG app
+│   ├── scripts/                      # dataset, question, and workload scripts
+│   ├── data/raw/                     # downloaded arXiv texts
+│   └── data/index/                   # generated Chroma index
+├── emb_models/                       # local embedding model cache
+├── hf-cache/                         # local Hugging Face cache
+└── logs/                             # runtime logs
 ```
 
 ## Sources
