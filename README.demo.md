@@ -9,12 +9,11 @@ Dashboard comparison:
 
 ## Measurement Setup
 
-Both demo scenarios use:
+All demo scenarios use:
 
 - [docker-compose.demo.yml](docker-compose.demo.yml)
 - [src/scripts/dataset.demo.json](src/scripts/dataset.demo.json): 1000 explicit arXiv document IDs
 - [src/scripts/questions.demo.json](src/scripts/questions.demo.json): 50 document-specific single-turn questions
-- `OLLAMA_MODEL=llama3:8b`
 - `RAG_QUESTION_LIMIT=0`, so all 50 demo questions are executed
 
 The demo compose file is intended for the hosted GMT ML machine. It enables GPU
@@ -23,10 +22,11 @@ read-only into the `ollama` container.
 
 ## Scenarios
 
-| Scenario | File                                                                 | Purpose                                       |
-|----------|----------------------------------------------------------------------|-----------------------------------------------|
-| Baseline | [usage_scenario.demo_baseline.yml](usage_scenario.demo_baseline.yml) | Simple chunking without BM25 re-ranking       |
-| Enhanced | [usage_scenario.demo_enhanced.yml](usage_scenario.demo_enhanced.yml) | Structure-aware chunking with BM25 re-ranking |
+| Scenario  | File                                                                 | Purpose                                                          |
+|-----------|----------------------------------------------------------------------|------------------------------------------------------------------|
+| Baseline  | [usage_scenario.demo_baseline.yml](usage_scenario.demo_baseline.yml) | Simple chunking without BM25 re-ranking                          |
+| Enhanced  | [usage_scenario.demo_enhanced.yml](usage_scenario.demo_enhanced.yml) | Structure-aware chunking with BM25 re-ranking                    |
+| Small LLM | [usage_scenario.demo_smallLLM.yml](usage_scenario.demo_smallLLM.yml) | Baseline retrieval setup with `phi3:mini` instead of `llama3:8b` |
 
 ## Configuration Difference
 
@@ -42,3 +42,6 @@ read-only into the `ollama` container.
 The comparison keeps the dataset, question workload, model, top-k, token limit, and
 hosted machine constant. The intended comparison is the effect of structure-aware
 chunking plus BM25 re-ranking on the measured GMT phases.
+
+The optional small-LLM scenario keeps the baseline retrieval setup constant and changes
+only `OLLAMA_MODEL` from `llama3:8b` to `phi3:mini`.
