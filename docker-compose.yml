@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    container_name: showcase-rag-app
+    container_name: rag-app
     ports:
       - "8000:8000"
     volumes:
@@ -14,19 +14,29 @@ services:
       - ./emb_models:/emb_models
     depends_on:
       - ollama
-    profiles:
-      - app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
 
   ollama:
-    container_name: showcase-ollama
+    container_name: ollama
     image: ollama/ollama@sha256:d4188c1dfa870386a14e299976aed96daeb83876b69e1a852c9d09ea76463b9f
     ports:
       - "11434:11434"
     volumes:
       - ollama-data:/root/.ollama
     restart: unless-stopped
-    profiles:
-      - app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
 
 volumes:
   ollama-data:

@@ -71,7 +71,7 @@ Important variables:
 ```text
 showcase-rag-greenmetrics
 ├── README.md                         # overview and guide selection
-├── README.demo.md                    # live-demo plan and dashboard narrative
+├── README.demo.md                    # prepared dashboard comparison
 ├── README.linux.md                   # local Linux measurement guide
 ├── README.windows.md                 # hosted-service guide for Windows users
 ├── docker-compose.yml                # local app execution without GMT
