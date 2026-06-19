@@ -19,10 +19,50 @@ services:
       MAX_TOKENS: 512
 
 flow:
-  - name: Pull Ollama Model
-    container: ollama
+  - name: Prepare Dataset
+    container: rag-app
     commands:
       - type: console
-        command: ollama ls #python scripts/pull_ollama_model.py
+        command: python scripts/get_dataset.py --selection scripts/dataset.demo.json --force
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: Warmup Indexing
+    container: rag-app
+    commands:
+      - type: console
+        command: python -m app.warmup_indexing
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: Indexing
+    container: rag-app
+    commands:
+      - type: console
+        command: python -m app.indexing
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: Pull Ollama Model
+    container: rag-app
+    commands:
+      - type: console
+        command: python scripts/pull_ollama_model.py
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: Warmup RAG
+    container: rag-app
+    commands:
+      - type: console
+        command: python -m app.warmup_rag
+        log-stdout: true
+        read-notes-stdout: true
+
+  - name: RAG Queries
+    container: rag-app
+    commands:
+      - type: console
+        command: python scripts/rag_queries.py
         log-stdout: true
         read-notes-stdout: true
