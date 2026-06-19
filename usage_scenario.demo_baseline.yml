@@ -20,7 +20,7 @@ services:
 
 flow:
   - name: Pull Ollama Model
-    container: rag-app
+    container: ollama
     commands:
       - type: console
         command: ollama ls #python scripts/pull_ollama_model.py
