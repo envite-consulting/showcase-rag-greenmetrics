@@ -47,7 +47,7 @@ flow:
     container: rag-app
     commands:
       - type: console
-        command: python scripts/pull_ollama_model.py
+        command: ollama ls #python scripts/pull_ollama_model.py
         log-stdout: true
         read-notes-stdout: true
 
