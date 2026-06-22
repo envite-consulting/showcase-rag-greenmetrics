@@ -13,7 +13,7 @@ services:
       CHUNK_OVERLAP: 24
       POST_BM25_RERANK: "False"
       TOP_K: 5
-      OLLAMA_MODEL: "phi3:mini"
+      OLLAMA_MODEL: "llama3.2:3b"
       RAG_QUESTIONS_PATH: "/src/scripts/questions.demo.json"
       RAG_QUESTION_LIMIT: 0
       MAX_TOKENS: 512
