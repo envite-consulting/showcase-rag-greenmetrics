@@ -20,7 +20,7 @@ git clone <repository-url> showcase-rag-greenmetrics
 cd showcase-rag-greenmetrics
 ```
 
-The RAG app provides defaults in [src/app/config.yaml](src/app/config.yaml). For local GMT experiments, edit the `environment` values in [usage_scenario.local.yml](usage_scenario.local.yml).
+The RAG app provides defaults in [src/app/config.yaml](../src/app/config.yaml). For local GMT experiments, edit the `environment` values in [usage_scenario.local.yml](usage_scenario.local.yml).
 
 ## Optional App Check
 
@@ -28,22 +28,22 @@ Before starting a GMT measurement, you can run the RAG app once to check that Do
 
 ```shell
 cd /path/to/showcase-rag-greenmetrics
-docker compose --profile app up --build
+docker compose up --build
 ```
 
 In a second terminal:
 
 ```shell
-docker exec showcase-ollama ollama pull llama3:8b
-docker exec showcase-rag-app python scripts/get_dataset.py --force
-docker exec showcase-rag-app python -m app.indexing
+docker exec ollama ollama pull llama3:8b
+docker exec rag-app python scripts/get_dataset.py --force
+docker exec rag-app python -m app.indexing
 curl -X POST "http://localhost:8000/ask" -H "Content-Type: application/json" -d "{\"q_id\":\"manual-001\",\"question\":\"What is the nature of gravity in string theory at high energies?\"}"
 ```
 
 Stop the app afterwards:
 
 ```shell
-docker compose --profile app down
+docker compose down
 ```
 
 ## Measure With Local GMT
@@ -52,23 +52,35 @@ Start the local GMT services as described in the official GMT installation guide
 
 ```shell
 cd /path/to/green-metrics-tool
-python3 runner.py --uri /path/to/showcase-rag-greenmetrics --filename usage_scenario.local.yml --name rag-local --allow-unsafe
+python3 runner.py --uri /path/to/showcase-rag-greenmetrics --filename gmt/usage_scenario.local.yml --name rag-local --allow-unsafe
 ```
 
 The report appears in the local GMT dashboard (default: http://metrics.green-coding.internal:9142). Use the dashboard to inspect the run or compare several runs.
+
+The GMT scenario pulls `enviteconsulting/showcase-rag-greenmetrics:demo` by default.
+Publish that image before the first run:
+
+```shell
+cd /path/to/showcase-rag-greenmetrics
+docker login
+bash gmt/build-and-push-image.sh
+```
+
+For another registry or an immutable version, set `IMAGE_REPO` while publishing and
+`RAG_APP_IMAGE` while starting GMT.
 
 ## Change RAG Configuration Locally
 
 Edit the `environment` values in [usage_scenario.local.yml](usage_scenario.local.yml) before starting a measurement. Useful variables include:
 
-| Variable | Example values |
-| --- | --- |
-| `CHUNKING_STRATEGY` | `simple`, `structure` |
-| `CHUNK_SIZE` / `CHUNK_OVERLAP` | `192` / `24`, `128` / `16` |
-| `POST_BM25_RERANK` | `True`, `False` |
-| `OLLAMA_MODEL` | `llama3:8b`, `tinyllama:1.1b` |
-| `RAG_QUESTION_LIMIT` | `4`, `8`, `12` |
-| `MAX_TOKENS` | `256`, `512` |
+| Variable                       | Example values                |
+|--------------------------------|-------------------------------|
+| `CHUNKING_STRATEGY`            | `simple`, `structure`         |
+| `CHUNK_SIZE` / `CHUNK_OVERLAP` | `192` / `24`, `128` / `16`    |
+| `POST_BM25_RERANK`             | `True`, `False`               |
+| `OLLAMA_MODEL`                 | `llama3:8b`, `tinyllama:1.1b` |
+| `RAG_QUESTION_LIMIT`           | `4`, `8`, `12`                |
+| `MAX_TOKENS`                   | `256`, `512`                  |
 
 ## Sources
 

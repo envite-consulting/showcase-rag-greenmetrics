@@ -6,11 +6,11 @@ The showcase is intentionally small and self-contained. It uses a fixed arXiv do
 
 ## Which Guide Should I Use?
 
-| Environment | Recommended path                | Guide                                  |
-|-------------|---------------------------------|----------------------------------------|
-| Linux       | Run GMT locally                 | [README.linux.md](README.linux.md)     |
-| Windows     | Use the free GMT hosted service | [README.windows.md](README.windows.md) |
-| Live demo   | Prepared dashboard comparison   | [README.demo.md](README.demo.md)       |
+| Environment | Recommended path                | Guide                                          |
+|-------------|---------------------------------|------------------------------------------------|
+| Linux       | Run GMT locally                 | [gmt/README.linux.md](gmt/README.linux.md)     |
+| Windows     | Use the free GMT hosted service | [gmt/README.windows.md](gmt/README.windows.md) |
+| Live demo   | Prepared dashboard comparison   | [gmt/README.demo.md](gmt/README.demo.md)       |
 
 Windows users should use the hosted GMT service instead of local measurements. Local WSL runs are useful for development, but they can produce limited or inconsistent measurement data depending on host support for metric providers.
 
@@ -43,15 +43,45 @@ The fixed workload is defined by:
 
 ## Scenarios
 
-| File                                                                 | Purpose                                                                                                           |
-|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| [usage_scenario.yml](usage_scenario.yml)                             | remote scenario for the GMT hosted service; downloads `tinyllama:1.1b` and uses fewer questions and shorter answers |
-| [usage_scenario.local.yml](usage_scenario.local.yml)                 | local Linux scenario; downloads `llama3:8b`                                                                       |
-| [usage_scenario.demo_baseline.yml](usage_scenario.demo_baseline.yml) | fuller hosted-service baseline using the preloaded `llama3:8b`, 1000 arXiv documents, and 50 questions            |
-| [usage_scenario.demo_enhanced.yml](usage_scenario.demo_enhanced.yml) | fuller hosted-service scenario using the preloaded `llama3:8b`, structured retrieval, and BM25 re-ranking         |
-| [usage_scenario.demo_smallLLM.yml](usage_scenario.demo_smallLLM.yml) | fuller hosted-service scenario using the preloaded `llama3.2:3b` instead of `llama3:8b`                           |
+| File                                                                         | Purpose                                                                                                             |
+|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| [gmt/usage_scenario.yml](gmt/usage_scenario.yml)                             | remote scenario for the GMT hosted service; downloads `tinyllama:1.1b` and uses fewer questions and shorter answers |
+| [gmt/usage_scenario.local.yml](gmt/usage_scenario.local.yml)                 | local Linux scenario; downloads `llama3:8b`                                                                         |
+| [gmt/usage_scenario.demo_baseline.yml](gmt/usage_scenario.demo_baseline.yml) | fuller hosted-service baseline using the preloaded `llama3:8b`, 1000 arXiv documents, and 50 questions              |
+| [gmt/usage_scenario.demo_enhanced.yml](gmt/usage_scenario.demo_enhanced.yml) | fuller hosted-service scenario using the preloaded `llama3:8b`, structured retrieval, and BM25 re-ranking           |
+| [gmt/usage_scenario.demo_smallLLM.yml](gmt/usage_scenario.demo_smallLLM.yml) | fuller hosted-service scenario using the preloaded `llama3.2:3b` instead of `llama3:8b`                             |
 
-The RAG app defaults are defined in [src/app/config.yaml](src/app/config.yaml). Variables declared in the `usage_scenario.*.yml` files override these defaults. For local Linux runs, edit [usage_scenario.local.yml](usage_scenario.local.yml) before starting the measurement. For hosted runs, keep [usage_scenario.yml](usage_scenario.yml) lightweight and adjust variables in the GMT Scenario Runner.
+The RAG app defaults are defined in [src/app/config.yaml](src/app/config.yaml). Variables declared in the `gmt/usage_scenario.*.yml` files override these defaults. For local Linux runs, edit [gmt/usage_scenario.local.yml](gmt/usage_scenario.local.yml) before starting the measurement. For hosted runs, keep [gmt/usage_scenario.yml](gmt/usage_scenario.yml) lightweight and adjust variables in the GMT Scenario Runner.
+
+## Prebuilt GMT Image
+
+The GMT compose files use the prebuilt image
+`enviteconsulting/showcase-rag-greenmetrics:demo` by default. This keeps dependency
+installation, including PyTorch and Sentence Transformers, out of each measurement
+setup.
+
+Build and push the image from Linux, macOS, Git Bash, or WSL:
+
+```shell
+bash gmt/build-and-push-image.sh
+```
+
+Pass a tag as the first argument when a fixed version is required:
+
+```shell
+bash gmt/build-and-push-image.sh dev-abc1234
+```
+
+The image repository and tag can also be configured through `IMAGE_REPO` and
+`IMAGE_TAG`. To run GMT with a different published image, set `RAG_APP_IMAGE` before
+starting the runner:
+
+```shell
+export RAG_APP_IMAGE=registry.example.com/showcase-rag-greenmetrics:dev-abc1234
+```
+
+On Windows, run the script in WSL with Docker Desktop's WSL integration enabled.
+The `.sh` files use LF line endings through `.gitattributes`.
 
 ## Configuration
 
@@ -59,43 +89,46 @@ Base runtime parameters are defined by [src/app/config.yaml](src/app/config.yaml
 
 Important variables:
 
-| Variable                       | Meaning                                  |
-|--------------------------------|------------------------------------------|
-| `CHUNKING_STRATEGY`            | `simple` or `structure`                  |
-| `CHUNK_SIZE` / `CHUNK_OVERLAP` | chunk sizing for indexing                |
-| `EMBEDDING_MODEL`              | Sentence Transformer model               |
-| `POST_BM25_RERANK`             | enable BM25 re-ranking                   |
-| `TOP_K`                        | number of retrieved text segments used as context |
+| Variable                       | Meaning                                                              |
+|--------------------------------|----------------------------------------------------------------------|
+| `CHUNKING_STRATEGY`            | `simple` or `structure`                                              |
+| `CHUNK_SIZE` / `CHUNK_OVERLAP` | chunk sizing for indexing                                            |
+| `EMBEDDING_MODEL`              | Sentence Transformer model                                           |
+| `POST_BM25_RERANK`             | enable BM25 re-ranking                                               |
+| `TOP_K`                        | number of retrieved text segments used as context                    |
 | `OLLAMA_MODEL`                 | model to download, or exact preloaded name and tag in demo scenarios |
-| `RAG_QUESTION_LIMIT`           | number of questions in the measured load |
+| `RAG_QUESTION_LIMIT`           | number of questions in the measured load                             |
 
 ## Structure
 
 ```text
 showcase-rag-greenmetrics
-├── README.md                         # overview and guide selection
-├── README.demo.md                    # prepared dashboard comparison
-├── README.linux.md                   # local Linux measurement guide
-├── README.windows.md                 # hosted-service guide for Windows users
-├── docker-compose.yml                # local app execution without GMT
-├── docker-compose.gmt.yml            # default GMT compose file
-├── docker-compose.demo.yml           # hosted GPU demo compose file
+├── README.md                           # overview and guide selection
+├── docker-compose.yml                  # local app execution without GMT
 ├── docker/
 │   └── Dockerfile
-├── usage_scenario.yml                # lightweight hosted-service scenario
-├── usage_scenario.local.yml          # local Linux GMT scenario
-├── usage_scenario.demo_baseline.yml  # prepared demo baseline run
-├── usage_scenario.demo_enhanced.yml  # prepared demo comparison run
-├── usage_scenario.demo_smallLLM.yml  # prepared demo small-LLM run
+├── gmt/
+│   ├── README.md                       # GMT setup and image publishing
+│   ├── README.demo.md                  # prepared dashboard comparison
+│   ├── README.linux.md                 # local Linux measurement guide
+│   ├── README.windows.md               # hosted-service guide for Windows users
+│   ├── build-and-push-image.sh         # publish the prebuilt RAG app image
+│   ├── docker-compose.gmt.yml          # default GMT compose file
+│   ├── docker-compose.demo.yml         # hosted GPU demo compose file
+│   ├── usage_scenario.yml              # lightweight hosted-service scenario
+│   ├── usage_scenario.local.yml        # local Linux GMT scenario
+│   ├── usage_scenario.demo_baseline.yml
+│   ├── usage_scenario.demo_enhanced.yml
+│   └── usage_scenario.demo_smallLLM.yml
 ├── requirements.txt
 ├── src/
-│   ├── app/                          # RAG app
-│   ├── scripts/                      # dataset, question, and workload scripts
-│   ├── data/raw/                     # downloaded arXiv texts
-│   └── data/index/                   # generated Chroma index
-├── emb_models/                       # local embedding model cache
-├── hf-cache/                         # local Hugging Face cache
-└── logs/                             # runtime logs
+│   ├── app/                            # RAG app
+│   ├── scripts/                        # dataset, question, and workload scripts
+│   ├── data/raw/                       # downloaded arXiv texts
+│   └── data/index/                     # generated Chroma index
+├── emb_models/                         # local embedding model cache
+├── hf-cache/                           # local Hugging Face cache
+└── logs/                               # runtime logs
 ```
 
 ## Sources

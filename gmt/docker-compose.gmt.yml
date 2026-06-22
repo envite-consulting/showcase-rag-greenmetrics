@@ -1,8 +1,6 @@
 services:
   rag-app:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
+    image: ${RAG_APP_IMAGE:-enviteconsulting/showcase-rag-greenmetrics:demo}
     container_name: rag-app
     depends_on:
       - ollama

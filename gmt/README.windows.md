@@ -14,7 +14,9 @@ The hosted service requires:
 - the application to be containerized
 - a [usage_scenario.yml](usage_scenario.yml) file in the repository
 
-This repository already provides the required Docker setup and usage scenario.
+This repository already provides the required Docker setup and usage scenario under
+the `gmt/` directory. The GMT compose files pull a prebuilt RAG app image instead of
+installing the Python dependencies during every measurement setup.
 
 ## Remote Default Scenario
 
@@ -37,7 +39,7 @@ Open the GMT hosted service: [ScenarioRunner - Submit Software](https://metrics.
 
 1. Enter a measurement name and your email address.
 2. Use this repository URL for the measurement.
-3. Use the default `usage_scenario.yml` as the scenario file.
+3. Use `gmt/usage_scenario.yml` as the scenario file.
 4. Select `CO2 Profiling (DVFS ON, TB ON, HT ON) Esprimo P956` as the hardware.
 5. Select `One-Off [Free - Fair use]` as the measurement interval.
 6. Start the measurement by clicking _Submit software_.
@@ -47,6 +49,28 @@ Open the GMT hosted service: [ScenarioRunner - Submit Software](https://metrics.
 The hosted report can be used to show phase-level metrics and demonstrate how GMT evaluates a containerized RAG workload.
 
 Keep in mind that the free version of the hosted service has certain [limitations and restrictions](https://www.green-coding.io/products/green-metrics-tool/).
+
+## Build The GMT Image From Windows
+
+The image script remains a Bash script and can be run through WSL. Start Docker
+Desktop, enable WSL integration for the distribution, and run:
+
+```shell
+cd /mnt/d/Workspace/Arbeit/showcase-rag-greenmetrics
+docker login
+bash gmt/build-and-push-image.sh
+```
+
+The default destination is `enviteconsulting/showcase-rag-greenmetrics:demo`. Override
+it when needed:
+
+```shell
+IMAGE_REPO=registry.example.com/team/showcase-rag-greenmetrics \
+  bash gmt/build-and-push-image.sh dev-abc1234
+```
+
+For the hosted GMT service, publish the selected image in a publicly accessible
+repository.
 
 ## What To Compare
 

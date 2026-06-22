@@ -27,6 +27,7 @@ src/data/raw/*
 docker-compose.override.yml
 
 # Local GMT or showcase exports
+gmt/
 gmt-results/
 reports/
 *.log

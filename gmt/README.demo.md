@@ -12,13 +12,15 @@ Dashboard comparison:
 All demo scenarios use:
 
 - [docker-compose.demo.yml](docker-compose.demo.yml)
-- [src/scripts/dataset.demo.json](src/scripts/dataset.demo.json): 1000 explicit arXiv document IDs
-- [src/scripts/questions.demo.json](src/scripts/questions.demo.json): 50 document-specific single-turn questions
+- [../src/scripts/dataset.demo.json](../src/scripts/dataset.demo.json): 1000 explicit arXiv document IDs
+- [../src/scripts/questions.demo.json](../src/scripts/questions.demo.json): 50 document-specific single-turn questions
 - `RAG_QUESTION_LIMIT=0`, so all 50 demo questions are executed
 
 The demo compose file is intended for the hosted GMT ML machine. It enables GPU
 access for `rag-app` and `ollama`, and mounts the hosted Ollama model volume
-read-only into the `ollama` container.
+read-only into the `ollama` container. It pulls the prebuilt
+`enviteconsulting/showcase-rag-greenmetrics:demo` image by default, avoiding a full
+Python dependency installation during measurement setup.
 
 ## Scenarios
 
