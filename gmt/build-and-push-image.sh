@@ -20,4 +20,3 @@ echo "Pushing ${IMAGE_REF}..."
 docker push "${IMAGE_REF}"
 
 echo "Done: ${IMAGE_REF}"
-echo "Use it for GMT with: RAG_APP_IMAGE=${IMAGE_REF}"

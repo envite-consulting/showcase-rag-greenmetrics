@@ -73,12 +73,8 @@ bash gmt/build-and-push-image.sh dev-abc1234
 ```
 
 The image repository and tag can also be configured through `IMAGE_REPO` and
-`IMAGE_TAG`. To run GMT with a different published image, set `RAG_APP_IMAGE` before
-starting the runner:
-
-```shell
-export RAG_APP_IMAGE=registry.example.com/showcase-rag-greenmetrics:dev-abc1234
-```
+`IMAGE_TAG`. When changing either value, update the fixed `image` entry in the GMT
+compose files to the same published image.
 
 On Windows, run the script in WSL with Docker Desktop's WSL integration enabled.
 The `.sh` files use LF line endings through `.gitattributes`.

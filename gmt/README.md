@@ -38,11 +38,9 @@ DOCKER_PLATFORM=linux/amd64 \
   bash gmt/build-and-push-image.sh dev-abc1234
 ```
 
-The GMT compose files use
-`enviteconsulting/showcase-rag-greenmetrics:demo` unless `RAG_APP_IMAGE` is set.
-For comparable measurements, prefer a fixed tag or image digest rather than
-overwriting `demo`. Images used by the hosted GMT service must be publicly pullable
-unless the service has matching registry credentials.
+The GMT compose files use the image
+`enviteconsulting/showcase-rag-greenmetrics:demo`. When publishing another repository
+or tag, update the `image` entry in both GMT compose files. 
 
 ## Guides
 

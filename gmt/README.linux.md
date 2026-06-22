@@ -67,7 +67,7 @@ bash gmt/build-and-push-image.sh
 ```
 
 For another registry or an immutable version, set `IMAGE_REPO` while publishing and
-`RAG_APP_IMAGE` while starting GMT.
+update the `image` entry in both GMT compose files accordingly.
 
 ## Change RAG Configuration Locally
 
