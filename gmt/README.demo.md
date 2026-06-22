@@ -5,7 +5,8 @@ the RAG showcase.
 
 Dashboard comparison:
 
-- TODO: add GMT dashboard comparison link
+- [Baseline vs. Enhanced](https://metrics.green-coding.io/compare.html?ids=3fef4fab-d0ab-45f0-9be4-d44e253d35c1,403bb9ee-30d4-480f-bb0b-3f847f69efdb&force_mode=)
+- [Baseline vs smallLLM+](https://metrics.green-coding.io/compare.html?ids=f2e7e2a0-dc5e-4997-91d6-cdebaa7b4ba6,403bb9ee-30d4-480f-bb0b-3f847f69efdb&force_mode=)
 
 ## Measurement Setup
 
