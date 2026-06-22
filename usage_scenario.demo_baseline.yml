@@ -1,7 +1,7 @@
 ---
 name: RAG Showcase - Full Baseline
 author: envite Consulting GmbH
-description: Full hosted-service baseline for comparing RAG configurations in the GMT dashboard. Keeps retrieval simple and uses a larger question workload than the lightweight default scenario.
+description: Full hosted-service baseline for comparing RAG configurations in the GMT dashboard. Uses a preloaded Ollama model, keeps retrieval simple, and uses a larger question workload than the lightweight default scenario.
 
 compose-file: !include docker-compose.demo.yml
 
@@ -40,14 +40,6 @@ flow:
     commands:
       - type: console
         command: python -m app.indexing
-        log-stdout: true
-        read-notes-stdout: true
-
-  - name: Pull Ollama Model
-    container: rag-app
-    commands:
-      - type: console
-        command: python scripts/pull_ollama_model.py
         log-stdout: true
         read-notes-stdout: true
 

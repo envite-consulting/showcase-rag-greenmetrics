@@ -1,7 +1,7 @@
 ---
 name: RAG Showcase - Demo Small LLM
 author: envite Consulting GmbH
-description: Hosted GPU demo scenario for comparing the baseline retrieval setup with a smaller Ollama model. Keeps chunking, retrieval, dataset, and question workload identical to the demo baseline, but uses phi3:mini instead of llama3:8b.
+description: Hosted GPU demo scenario for comparing the baseline retrieval setup with a smaller preloaded Ollama model. Keeps chunking, retrieval, dataset, and question workload identical to the demo baseline, but uses llama3.2:3b instead of llama3:8b.
 
 compose-file: !include docker-compose.demo.yml
 
@@ -40,14 +40,6 @@ flow:
     commands:
       - type: console
         command: python -m app.indexing
-        log-stdout: true
-        read-notes-stdout: true
-
-  - name: Pull Ollama Model
-    container: rag-app
-    commands:
-      - type: console
-        command: python scripts/pull_ollama_model.py
         log-stdout: true
         read-notes-stdout: true
 

@@ -1,7 +1,7 @@
 ---
 name: RAG Showcase - Local
 author: envite Consulting GmbH
-description: Local GMT scenario for Linux measurements. Adjust the service environment values below to test different RAG configurations.
+description: Local GMT scenario for Linux measurements. Downloads the configured Ollama model. Adjust the service environment values below to test different RAG configurations.
 
 compose-file: !include docker-compose.gmt.yml
 

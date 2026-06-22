@@ -21,7 +21,7 @@ The measured RAG system consists of two services:
 - `rag-app`: FastAPI application for indexing, retrieval, augmentation, and generation orchestration
 - `ollama`: local LLM service used by the RAG app
 
-Both scenarios measure these phases:
+The standard remote and local scenarios measure these phases:
 
 1. `Prepare Dataset`
 2. `Warmup Indexing`
@@ -31,6 +31,8 @@ Both scenarios measure these phases:
 6. `RAG Queries`
 
 The `Prepare Dataset` phase downloads the fixed document set inside the measured container before indexing.
+
+The standard remote and local scenarios download their configured Ollama model because they do not have access to the prepared GMT model volume. The three demo scenarios skip the pull step and use models already available in the mounted read-only volume. In those demo scenarios, `OLLAMA_MODEL` must exactly match the complete name and tag of a model in that volume.
 
 The fixed workload is defined by:
 
@@ -43,11 +45,11 @@ The fixed workload is defined by:
 
 | File                                                                 | Purpose                                                                                                           |
 |----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| [usage_scenario.yml](usage_scenario.yml)                             | remote scenario for the GMT hosted service; defaults to `tinyllama:1.1b`, fewer questions, and shorter answers    |
-| [usage_scenario.local.yml](usage_scenario.local.yml)                 | local Linux scenario; defaults to `llama3:8b`                                                                     |
-| [usage_scenario.demo_baseline.yml](usage_scenario.demo_baseline.yml) | fuller hosted-service baseline with 1000 arXiv documents and 50 questions for prepared dashboard comparisons      |
-| [usage_scenario.demo_enhanced.yml](usage_scenario.demo_enhanced.yml) | fuller hosted-service scenario with 1000 arXiv documents, 50 questions, structured retrieval, and BM25 re-ranking |
-| [usage_scenario.demo_smallLLM.yml](usage_scenario.demo_smallLLM.yml) | fuller hosted-service scenario with baseline retrieval and `phi3:mini` instead of `llama3:8b`                     |
+| [usage_scenario.yml](usage_scenario.yml)                             | remote scenario for the GMT hosted service; downloads `tinyllama:1.1b` and uses fewer questions and shorter answers |
+| [usage_scenario.local.yml](usage_scenario.local.yml)                 | local Linux scenario; downloads `llama3:8b`                                                                       |
+| [usage_scenario.demo_baseline.yml](usage_scenario.demo_baseline.yml) | fuller hosted-service baseline using the preloaded `llama3:8b`, 1000 arXiv documents, and 50 questions            |
+| [usage_scenario.demo_enhanced.yml](usage_scenario.demo_enhanced.yml) | fuller hosted-service scenario using the preloaded `llama3:8b`, structured retrieval, and BM25 re-ranking         |
+| [usage_scenario.demo_smallLLM.yml](usage_scenario.demo_smallLLM.yml) | fuller hosted-service scenario using the preloaded `llama3.2:3b` instead of `llama3:8b`                           |
 
 The RAG app defaults are defined in [src/app/config.yaml](src/app/config.yaml). Variables declared in the `usage_scenario.*.yml` files override these defaults. For local Linux runs, edit [usage_scenario.local.yml](usage_scenario.local.yml) before starting the measurement. For hosted runs, keep [usage_scenario.yml](usage_scenario.yml) lightweight and adjust variables in the GMT Scenario Runner.
 
@@ -64,7 +66,7 @@ Important variables:
 | `EMBEDDING_MODEL`              | Sentence Transformer model               |
 | `POST_BM25_RERANK`             | enable BM25 re-ranking                   |
 | `TOP_K`                        | number of retrieved text segments used as context |
-| `OLLAMA_MODEL`                 | model served by Ollama                   |
+| `OLLAMA_MODEL`                 | model to download, or exact preloaded name and tag in demo scenarios |
 | `RAG_QUESTION_LIMIT`           | number of questions in the measured load |
 
 ## Structure

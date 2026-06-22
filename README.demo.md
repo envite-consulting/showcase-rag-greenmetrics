@@ -22,11 +22,11 @@ read-only into the `ollama` container.
 
 ## Scenarios
 
-| Scenario  | File                                                                 | Purpose                                                          |
-|-----------|----------------------------------------------------------------------|------------------------------------------------------------------|
-| Baseline  | [usage_scenario.demo_baseline.yml](usage_scenario.demo_baseline.yml) | Simple chunking without BM25 re-ranking                          |
-| Enhanced  | [usage_scenario.demo_enhanced.yml](usage_scenario.demo_enhanced.yml) | Structure-aware chunking with BM25 re-ranking                    |
-| Small LLM | [usage_scenario.demo_smallLLM.yml](usage_scenario.demo_smallLLM.yml) | Baseline retrieval setup with `phi3:mini` instead of `llama3:8b` |
+| Scenario  | File                                                                 | Purpose                                                            |
+|-----------|----------------------------------------------------------------------|--------------------------------------------------------------------|
+| Baseline  | [usage_scenario.demo_baseline.yml](usage_scenario.demo_baseline.yml) | Simple chunking without BM25 re-ranking                            |
+| Enhanced  | [usage_scenario.demo_enhanced.yml](usage_scenario.demo_enhanced.yml) | Structure-aware chunking with BM25 re-ranking                      |
+| Small LLM | [usage_scenario.demo_smallLLM.yml](usage_scenario.demo_smallLLM.yml) | Baseline retrieval setup with `llama3.2:3b` instead of `llama3:8b` |
 
 ## Configuration Difference
 
@@ -44,4 +44,4 @@ hosted machine constant. The intended comparison is the effect of structure-awar
 chunking plus BM25 re-ranking on the measured GMT phases.
 
 The optional small-LLM scenario keeps the baseline retrieval setup constant and changes
-only `OLLAMA_MODEL` from `llama3:8b` to `phi3:mini`.
+only `OLLAMA_MODEL` from `llama3:8b` to `llama3.2:3b`.

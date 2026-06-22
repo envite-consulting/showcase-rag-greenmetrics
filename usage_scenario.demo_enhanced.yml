@@ -1,7 +1,7 @@
 ---
 name: RAG Showcase - Full Enhanced Retrieval
 author: envite Consulting GmbH
-description: Full hosted-service scenario for comparing a more structured retrieval configuration against the baseline in the GMT dashboard.
+description: Full hosted-service scenario using a preloaded Ollama model for comparing a more structured retrieval configuration against the baseline in the GMT dashboard.
 
 compose-file: !include docker-compose.demo.yml
 
@@ -40,14 +40,6 @@ flow:
     commands:
       - type: console
         command: python -m app.indexing
-        log-stdout: true
-        read-notes-stdout: true
-
-  - name: Pull Ollama Model
-    container: rag-app
-    commands:
-      - type: console
-        command: python scripts/pull_ollama_model.py
         log-stdout: true
         read-notes-stdout: true
 

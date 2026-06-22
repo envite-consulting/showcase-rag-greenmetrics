@@ -1,7 +1,7 @@
 ---
 name: RAG Showcase - Remote Default
 author: envite Consulting GmbH
-description: Small default scenario for the Green Metrics Tool hosted service. Uses a tiny Ollama model and a reduced question set so remote showcase runs stay lightweight.
+description: Small default scenario for the Green Metrics Tool hosted service. Downloads a tiny Ollama model and uses a reduced question set so remote showcase runs stay lightweight.
 
 compose-file: !include docker-compose.gmt.yml
 
